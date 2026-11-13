@@ -1,0 +1,3294 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+<!-- This site is hosted on Netlify. Anyone can build and deploy a site
+     like this one for free: https://netlify.new/?utm_campaign=loops&utm_source=ai-legible&utm_medium=owned&utm_content=comment&utm_id=8ee8935d-fea4-4e0c-82a5-0df06811612a
+     Netlify hosting facts for this site: static/SSR served via Netlify Edge. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title data-id="th-modified">Dianas Flappy-Birthday: Bücher-Flug mit Trudy (Cinematic Edition)</title>
+    <style>
+        :root {
+            --bg-dark: #0f1712;
+            --bg-emerald: #13261b;
+            --matcha-light: #e6f4dc;
+            --matcha-mid: #7fa668;
+            --matcha-dark: #3b5a2b;
+            --matcha-neon: #a3e635;
+            --gold: #fbbf24;
+            --gold-dark: #b45309;
+            --parchment: #fdfaf3;
+            --ink-dark: #1c211e;
+            --jura-red: #b91c1c;
+            --tattoo-purple: #c084fc;
+            --copper-hair: #d9531e;
+        }
+
+        /* 1. STRIKTES ANTI-BLAU-BLITZ RESET FÜR TOUCH & KLICK */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        input, select, textarea {
+            user-select: text;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            background: radial-gradient(circle at center, #1b3325 0%, #0b110e 100%);
+            color: var(--ink-dark);
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 10px;
+            overflow-x: hidden;
+            touch-action: none;
+        }
+
+        /* Always-Accessible Top Bar */
+        .top-bar {
+            width: 100%;
+            max-width: 1020px;
+            background: rgba(15, 23, 18, 0.92);
+            border: 1px solid rgba(127, 166, 104, 0.45);
+            border-radius: 14px;
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 8px;
+            color: #e5e7eb;
+            font-size: 12px;
+            flex-wrap: wrap;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+        }
+
+        .top-status-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge-edition {
+            background: rgba(217, 83, 30, 0.22);
+            border: 1px solid rgba(251, 191, 36, 0.65);
+            color: #fde68a;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 11.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .top-live-pill {
+            background: rgba(31, 41, 55, 0.9);
+            border: 1px solid rgba(127, 166, 104, 0.5);
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-weight: 800;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .util-btn {
+            background: rgba(31, 41, 55, 0.95);
+            color: #f3f4f6;
+            border: 1px solid rgba(127, 166, 104, 0.5);
+            padding: 6px 10px;
+            border-radius: 10px;
+            font-size: 11.5px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: transform 0.1s ease, background 0.15s ease;
+            touch-action: none;
+        }
+
+        .util-btn:hover {
+            background: rgba(55, 65, 81, 0.98);
+            transform: translateY(-1px);
+        }
+
+        .util-btn:active {
+            transform: translateY(1px);
+        }
+
+        .util-btn.btn-new-game {
+            background: linear-gradient(135deg, #65a30d 0%, #3f6212 100%);
+            border-color: #a3e635;
+            color: #fff;
+        }
+
+        .util-btn.btn-download-html {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            border-color: #7dd3fc;
+            color: #fff;
+        }
+
+        .util-btn.btn-qr-highlight {
+            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+            border-color: #fde68a;
+            color: #fff;
+        }
+
+        /* Main Game Viewport */
+        #game-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1020px;
+            aspect-ratio: 16 / 9;
+            min-height: 450px;
+            max-height: 82vh;
+            background: #141a17;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 0 3px var(--matcha-mid);
+            touch-action: none;
+        }
+
+        @media (max-width: 680px) {
+            #game-wrapper {
+                aspect-ratio: auto;
+                height: 75vh;
+                border-radius: 16px;
+            }
+        }
+
+        #gameCanvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            touch-action: none;
+        }
+
+        /* Atmospheric Vignettes (Soft edge glow, never a blue flash) */
+        .vignette-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            z-index: 4;
+        }
+
+        #matcha-vignette {
+            box-shadow: inset 0 0 80px 22px rgba(163, 230, 53, 0.38);
+        }
+
+        #trudy-vignette {
+            box-shadow: inset 0 0 85px 24px rgba(251, 191, 36, 0.4);
+        }
+
+        #shield-vignette {
+            box-shadow: inset 0 0 75px 18px rgba(192, 132, 252, 0.4);
+        }
+
+        #hit-vignette {
+            box-shadow: inset 0 0 90px 28px rgba(239, 68, 68, 0.5);
+        }
+
+        /* Chapter Banner */
+        #chapter-banner {
+            position: absolute;
+            top: 86px;
+            left: 50%;
+            transform: translate(-50%, -12px);
+            background: rgba(15, 23, 18, 0.92);
+            border: 2px solid var(--gold);
+            padding: 8px 24px;
+            border-radius: 16px;
+            text-align: center;
+            color: #fff;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 12;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.6);
+        }
+
+        #chapter-banner.visible {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        .chapter-sub {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            font-weight: 800;
+        }
+
+        .chapter-main {
+            font-size: 17px;
+            font-weight: 800;
+            margin-top: 2px;
+        }
+
+        /* HUD inside Canvas */
+        #hud {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 10px 14px;
+            pointer-events: none;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .hud-top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .hud-book-box {
+            background: rgba(15, 23, 18, 0.88);
+            border: 2px solid rgba(127, 166, 104, 0.85);
+            border-radius: 16px;
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+        }
+
+        .hud-counter-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #86efac;
+            font-weight: 800;
+        }
+
+        .hud-counter-value {
+            font-size: 20px;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.1;
+        }
+
+        .hud-counter-value span.gold-num {
+            color: var(--gold);
+        }
+
+        .book-slots {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(31, 41, 55, 0.85);
+            padding: 4px 8px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+
+        .book-slot-icon {
+            font-size: 16px;
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+            opacity: 0.22;
+            filter: grayscale(100%);
+        }
+
+        .book-slot-icon.active {
+            opacity: 1;
+            filter: none;
+            transform: scale(1.2);
+        }
+
+        .hud-powerups {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .power-pill {
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #fff;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        }
+
+        .pill-trudy {
+            background: rgba(146, 64, 14, 0.94);
+            border: 2px solid var(--gold);
+        }
+
+        .pill-matcha {
+            background: rgba(54, 83, 20, 0.94);
+            border: 2px solid var(--matcha-neon);
+        }
+
+        .pill-shield {
+            background: rgba(88, 28, 135, 0.94);
+            border: 2px solid var(--tattoo-purple);
+        }
+
+        .timer-badge {
+            background: rgba(0, 0, 0, 0.45);
+            padding: 1px 6px;
+            border-radius: 6px;
+            font-size: 11px;
+        }
+
+        /* Progress Bar */
+        .hud-progress-wrap {
+            width: 100%;
+            max-width: 560px;
+            margin: 0 auto;
+            background: rgba(15, 23, 18, 0.84);
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            border-radius: 999px;
+            height: 22px;
+            padding: 3px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        #progress-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #22c55e 0%, #a855f7 52%, #fbbf24 100%);
+            width: 4%;
+            transition: width 0.12s linear;
+        }
+
+        .progress-labels {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 12px;
+            font-size: 10px;
+            font-weight: 800;
+            color: #f3f4f6;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+        }
+
+        /* Overlays (Start, Victory, Settings, QR) */
+        .overlay-screen {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 15, 12, 0.82);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            z-index: 25;
+        }
+
+        .card-panel {
+            background: var(--parchment);
+            border: 3px solid var(--matcha-mid);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 780px;
+            max-height: 95%;
+            overflow-y: auto;
+            padding: 18px 22px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.75);
+            color: var(--ink-dark);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            border-bottom: 2px solid rgba(127, 166, 104, 0.25);
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .tag-pill {
+            display: inline-block;
+            background: #dcfce7;
+            color: #14532d;
+            border: 1px solid #86efac;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 999px;
+            margin-bottom: 4px;
+        }
+
+        .title-xl {
+            font-size: 24px;
+            font-weight: 900;
+            color: #111827;
+            line-height: 1.15;
+        }
+
+        .avatar-pair {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 6px 12px;
+            border-radius: 16px;
+        }
+
+        .avatar-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            overflow: hidden;
+            border: 2px solid var(--copper-hair);
+            background: #ffedd5;
+        }
+
+        .avatar-circle.trudy {
+            border-color: #52525b;
+            background: #e4e4e7;
+        }
+
+        .avatar-circle img, .avatar-circle canvas {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .intro-lead {
+            font-size: 13px;
+            line-height: 1.48;
+            color: #374151;
+            margin-bottom: 12px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        @media (max-width: 640px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .title-xl {
+                font-size: 19px;
+            }
+        }
+
+        .feature-box {
+            border-radius: 16px;
+            padding: 10px 12px;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .feature-box h4 {
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .f-green {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            color: #14532d;
+        }
+
+        .f-red {
+            background: #fef2f2;
+            border: 1px solid #fca5a5;
+            color: #7f1d1d;
+        }
+
+        .f-gold {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            color: #78350f;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .controls-hint {
+            font-size: 12px;
+            color: #4b5563;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .key-badge {
+            background: #e5e7eb;
+            color: #111827;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+        }
+
+        .btn-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #65a30d 0%, #3f6212 100%);
+            color: #fff;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #1a2e05, 0 10px 20px rgba(0,0,0,0.25);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            touch-action: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 0 #1a2e05, 0 14px 24px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #1a2e05;
+        }
+
+        .btn-secondary {
+            background: #fef3c7;
+            color: #92400e;
+            border: 2px solid #f59e0b;
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            touch-action: none;
+        }
+
+        .btn-secondary:hover {
+            background: #fde68a;
+        }
+
+        /* Victory Voucher Layout */
+        .voucher-grid {
+            display: grid;
+            grid-template-columns: 1.35fr 1fr;
+            gap: 14px;
+            margin: 12px 0 16px 0;
+        }
+
+        @media (max-width: 680px) {
+            .voucher-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .voucher-certificate {
+            background: linear-gradient(135deg, #fffbeb 0%, #f0fdf4 100%);
+            border: 2px dashed #15803d;
+            border-radius: 18px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .voucher-score-badge {
+            background: #064e3b;
+            color: #fff;
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            padding: 8px 16px;
+            text-align: center;
+            min-width: 96px;
+        }
+
+        .voucher-score-num {
+            font-size: 30px;
+            font-weight: 900;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .receipt-box {
+            background: #ffffff;
+            border: 2px solid #d1d5db;
+            border-radius: 18px;
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .wishlist-items {
+            max-height: 165px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin: 8px 0;
+            padding-right: 4px;
+        }
+
+        .wishlist-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+            padding: 5px 8px;
+            border-radius: 10px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            font-size: 12px;
+        }
+
+        .wishlist-row.locked {
+            background: #f3f4f6;
+            border-color: #e5e7eb;
+            color: #9ca3af;
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .wishlist-input {
+            border: none;
+            background: transparent;
+            font-size: 12px;
+            font-weight: 700;
+            color: #111827;
+            width: 100%;
+            outline: none;
+            border-bottom: 1px dashed transparent;
+        }
+
+        .wishlist-input:focus {
+            border-bottom-color: #15803d;
+        }
+
+        .stamp-seal {
+            border: 2px solid #b91c1c;
+            color: #b91c1c;
+            background: #fef2f2;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            transform: rotate(-5deg);
+            text-align: center;
+        }
+
+        /* Settings & QR Forms */
+        .settings-group {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 14px;
+            padding: 10px 12px;
+            margin-bottom: 10px;
+        }
+
+        .settings-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 4px;
+            color: #1f2937;
+        }
+
+        .text-input, .select-input {
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: 10px;
+            border: 1px solid #9ca3af;
+            font-size: 13px;
+            background: #fff;
+            color: #111827;
+        }
+
+        .qr-layout {
+            display: grid;
+            grid-template-columns: 230px 1fr;
+            gap: 16px;
+            align-items: center;
+            margin: 12px 0;
+        }
+
+        @media (max-width: 640px) {
+            .qr-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .qr-preview-box {
+            background: #ffffff;
+            border: 3px solid var(--matcha-dark);
+            border-radius: 20px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        #qr-code-img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        /* Bottom Mobile Helper Bar */
+        .bottom-bar {
+            width: 100%;
+            max-width: 1020px;
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #9ca3af;
+            font-size: 12px;
+            gap: 8px;
+        }
+
+        .mobile-flap-btn {
+            background: linear-gradient(135deg, #65a30d 0%, #3f6212 100%);
+            color: #fff;
+            border: none;
+            padding: 9px 20px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 13px;
+            cursor: pointer;
+            box-shadow: 0 3px 0 #1a2e05;
+            touch-action: none;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+<meta property="og:title" content="Dianas Flappy-Birthday: Bücher-Flug mit Trudy (Cinematic Edition)" data-id="th-modified" ><meta name="description" content="dianas_flappy_birthday" data-id="th-modified" ><meta property="og:description" content="dianas_flappy_birthday" data-id="th-modified" ><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified" ><meta property="og:image:width" content="1501" data-id="th-modified" ><meta property="og:image:height" content="1501" data-id="th-modified" ><meta property="og:image:type" content="image/png" data-id="th-modified" ><meta property="og:url" content="https://happy-birthday-diana.tiiny.site/" data-id="th-modified" ><meta property="og:type" content="website" data-id="th-modified" ><script defer data-domain="happy-birthday-diana.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script></head>
+<body>
+
+    <!-- ALWAYS-ACCESSIBLE TOP BAR -->
+    <div class="top-bar">
+        <div class="top-status-group">
+            <span class="badge-edition">🎂 Dianas Flappy-Birthday</span>
+            <span class="top-live-pill" title="Aktuell erspielte Bücher">
+                <span>📚 Bücher:</span>
+                <span id="top-book-counter" style="color:var(--gold);">2 / 8</span>
+            </span>
+            <span class="top-live-pill" title="Flug-Fortschritt bis zum Zielbogen">
+                <span>🏰 Ziel:</span>
+                <span id="top-progress-pct" style="color:#86efac;">0%</span>
+            </span>
+        </div>
+
+        <div class="top-actions">
+            <button type="button" id="top-new-game-btn" class="util-btn btn-new-game" title="Sofort ein neues Spiel starten">
+                <span>🚀</span> <span>Neues Spiel</span>
+            </button>
+            <button type="button" id="top-download-html-btn" class="util-btn btn-download-html" title="Komplette Spiel-Datei (.html) herunterladen">
+                <span>💾</span> <span>Spiel-Datei (.html) herunterladen</span>
+            </button>
+            <button type="button" id="open-qr-top-btn" class="util-btn btn-qr-highlight" title="QR-Code & Geschenkkarte erstellen">
+                <span>📱</span> <span>QR-Code & Geschenkkarte</span>
+            </button>
+            <button type="button" id="music-btn" class="util-btn" title="Musik & Ton an/aus">
+                <span id="mute-icon">🔊</span> <span id="mute-label">Ton</span>
+            </button>
+            <button type="button" id="settings-btn" class="util-btn" title="Fotos & Schwierigkeit anpassen">
+                <span>⚙️</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN GAME VIEWPORT -->
+    <div id="game-wrapper">
+        <canvas id="gameCanvas" width="960" height="540"></canvas>
+
+        <!-- Atmospheric Vignettes (Soft edge glow only, no blue flash) -->
+        <div id="matcha-vignette" class="vignette-layer"></div>
+        <div id="trudy-vignette" class="vignette-layer"></div>
+        <div id="shield-vignette" class="vignette-layer"></div>
+        <div id="hit-vignette" class="vignette-layer"></div>
+
+        <!-- Chapter Transition Banner -->
+        <div id="chapter-banner">
+            <div id="chapter-subtitle" class="chapter-sub">Kapitel I</div>
+            <div id="chapter-title" class="chapter-main">Matcha-Café & Tattoo-Viertel</div>
+        </div>
+
+        <!-- Gameplay HUD -->
+        <div id="hud" class="hidden">
+            <div class="hud-top-row">
+                <div class="hud-book-box">
+                    <div>
+                        <div class="hud-counter-label">Erspielte Bücher</div>
+                        <div class="hud-counter-value">
+                            <span id="book-count-text" class="gold-num">2</span>
+                            <span style="font-size:13px; color:#9ca3af; font-weight:700;">/ 8 Max.</span>
+                        </div>
+                    </div>
+                    <div id="book-slots-container" class="book-slots"></div>
+                </div>
+
+                <div class="hud-powerups">
+                    <div id="hud-shield" class="power-pill pill-shield hidden">
+                        <span>🖋️</span> <span>Tattoo-Schild aktiv</span>
+                    </div>
+                    <div id="hud-matcha" class="power-pill pill-matcha hidden">
+                        <span>🍵</span> <span>Matcha-Fokus</span>
+                        <span id="matcha-timer-text" class="timer-badge">6s</span>
+                    </div>
+                    <div id="hud-trudy" class="power-pill pill-trudy hidden">
+                        <span>🐕</span> <span>Tigerdackel Trudy!</span>
+                        <span id="trudy-timer-text" class="timer-badge">7s</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hud-progress-wrap">
+                <div id="progress-fill"></div>
+                <div class="progress-labels">
+                    <span>🍵 Kap. I: Matcha & Ink</span>
+                    <span>⚖️ Kap. II: Jura-Bibliothek</span>
+                    <span id="time-left-label">🎂 Ziel: 0%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- START OVERLAY ("Dianas Geburtstags-Chronik") -->
+        <div id="start-screen" class="overlay-screen">
+            <div class="card-panel">
+                <div class="card-header">
+                    <div>
+                        <span class="tag-pill">📖 Dianas Geburtstags-Chronik • Cinematic Edition</span>
+                        <h1 class="title-xl">Dianas Flappy-Bücher-Flug mit Trudy!</h1>
+                    </div>
+                    <div class="avatar-pair">
+                        <div style="text-align:center;">
+                            <div id="start-diana-badge" class="avatar-circle">
+                                <canvas id="diana-mini-portrait" width="96" height="96"></canvas>
+                            </div>
+                            <div style="font-size:10px; font-weight:800; margin-top:2px;">Diana</div>
+                        </div>
+                        <span style="font-weight:900; color:#15803d;">+</span>
+                        <div style="text-align:center;">
+                            <div id="start-trudy-badge" class="avatar-circle trudy">
+                                <canvas id="trudy-mini-portrait" width="96" height="96"></canvas>
+                            </div>
+                            <div style="font-size:10px; font-weight:800; margin-top:2px;">Trudy</div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="intro-lead">
+                    Alles Gute zum Geburtstag, liebe <strong>Diana</strong>! Fliege im gemütlichen <strong>weißen Zopfmuster-Strickpullover</strong>, mit der <strong>Sonnenbrille im kupfer-roten Haar</strong> und deinem <strong>Iced Matcha Latte</strong> durch drei Kapitel bis zum großen goldenen Zielbogen. Deine Bücher schweben an einem goldenen Faden hinter dir her: <strong>Jedes Buch (bis maximal 8), das du ins Ziel bringst, wird dir in echt gekauft!</strong>
+                </p>
+
+                <div class="feature-grid">
+                    <div class="feature-box f-green">
+                        <h4>📚 Bücher-Kette (Max. 8)</h4>
+                        <p>Du startest mit <strong>2 Büchern</strong>. Jedes eingesammelte Buch reiht sich an der goldenen Schnur hinter dir ein – bis zum <strong>Maximum von 8 Büchern</strong>!</p>
+                    </div>
+                    <div class="feature-box f-red">
+                        <h4>⚖️ Jura-Türme (-1 Buch)</h4>
+                        <p>Kein frustrierendes Game-Over! Streifst du einen <strong>Habersack- oder BGB-Turm (§)</strong>, ertönt der Richterhammer, du prallst sanft in die Mitte, verlierst aber <strong>1 Buch</strong>!</p>
+                    </div>
+                    <div class="feature-box f-gold">
+                        <h4>🐕 Tigerdackel Trudy & Boosts</h4>
+                        <p><strong>Zwergdackel Trudy</strong> schiebt §-Säulen per Schallwellen-Bellen auseinander & zieht Bücher magnetisch an! <strong>Matcha 🍵</strong> & <strong>Tattoo-Schild 🖋️</strong> helfen dir.</p>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="controls-hint">
+                        <span class="key-badge">Leertaste / ↑</span>
+                        <span>oder</span>
+                        <span class="key-badge">Tippen / Klick</span>
+                        <span>= 100% Steuerung bis durch den Zielbogen!</span>
+                    </div>
+                    <div class="btn-row">
+                        <button type="button" id="open-qr-start-btn" class="btn-secondary" style="border-color:#15803d; background:#dcfce7; color:#14532d;">
+                            <span>📱</span> <span>QR-Code & Karte</span>
+                        </button>
+                        <button type="button" id="open-photo-modal-btn" class="btn-secondary">
+                            <span>📸</span> <span>Fotos / Optionen</span>
+                        </button>
+                        <button type="button" id="start-game-btn" class="btn-primary">
+                            <span>🚀</span> <span>Direkt losfliegen! (Spiel starten)</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VICTORY / VOUCHER OVERLAY -->
+        <div id="victory-screen" class="overlay-screen hidden">
+            <div class="card-panel" style="border-color: var(--gold);">
+                <div class="card-header">
+                    <div>
+                        <span class="tag-pill" style="background:#fef3c7; color:#92400e; border-color:#fbbf24;">🎂 100% Zielbogen erreicht! Happy Birthday!</span>
+                        <h2 id="victory-headline" class="title-xl">🎉 6 von 8 Büchern erspielt!</h2>
+                    </div>
+                    <div class="stamp-seal">
+                        <div>⚖️ Juristisch geprüft &</div>
+                        <div>🐾 von Trudy beglaubigt</div>
+                    </div>
+                </div>
+
+                <div class="voucher-grid">
+                    <!-- Left: Official Certificate -->
+                    <div class="voucher-certificate">
+                        <div>
+                            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px;">
+                                <div style="display:flex; align-items:center; gap:10px;">
+                                    <div id="voucher-diana-avatar" class="avatar-circle">
+                                        <canvas id="voucher-diana-canvas" width="96" height="96"></canvas>
+                                    </div>
+                                    <div id="voucher-trudy-avatar" class="avatar-circle trudy">
+                                        <canvas id="voucher-trudy-canvas" width="96" height="96"></canvas>
+                                    </div>
+                                    <div>
+                                        <div style="font-size:10px; font-weight:800; text-transform:uppercase; color:#15803d;">Offizieller Buch-Gutschein</div>
+                                        <div style="font-size:16px; font-weight:900; color:#111827;">Für Diana & Trudy</div>
+                                    </div>
+                                </div>
+                                <div class="voucher-score-badge">
+                                    <div style="font-size:9px; text-transform:uppercase; color:#a7f3d0; font-weight:800;">Erspielt</div>
+                                    <div class="voucher-score-num"><span id="final-book-count">6</span><span style="font-size:14px; color:#fff;">/8</span></div>
+                                    <div style="font-size:10px; color:#ecfdf5; font-weight:700;">Bücher</div>
+                                </div>
+                            </div>
+
+                            <p id="victory-subtext" style="font-size:12.5px; color:#374151; line-height:1.45; margin-bottom:10px;"></p>
+
+                            <div id="voucher-custom-msg" style="background:#ffffff; border:1px solid #bbf7d0; padding:8px 10px; border-radius:10px; font-size:12px; font-style:italic; color:#1f2937;">
+                                „Einlösbar beim nächsten gemeinsamen Buchhandlungs-Shopping (inklusive Iced Matcha Latte)!“
+                            </div>
+                        </div>
+
+                        <div style="display:flex; justify-content:space-around; border-top:1px solid rgba(21,128,61,0.2); padding-top:8px; margin-top:10px; font-size:11px; color:#4b5563;">
+                            <span>📚 Gefangen: <strong id="stat-collected" style="color:#111827;">0</strong></span>
+                            <span>⚖️ §-Abzüge: <strong id="stat-lost" style="color:#b91c1c;">0</strong></span>
+                            <span>🐕 Trudy-Einsätze: <strong id="stat-trudy" style="color:#b45309;">0</strong></span>
+                        </div>
+                    </div>
+
+                    <!-- Right: Interactive Bookstore Receipt ("Buchhandlungs-Bon") -->
+                    <div class="receipt-box">
+                        <div>
+                            <div style="text-align:center; border-bottom:1px dashed #d1d5db; padding-bottom:6px;">
+                                <div style="font-size:10px; font-weight:800; color:#6b7280; text-transform:uppercase;">Buchhandlungs-Bon</div>
+                                <div style="font-size:12px; font-weight:900; color:#111827;">Erspielte Wunschbücher eintragen & abhaken 🛒</div>
+                            </div>
+                            <div id="receipt-checklist" class="wishlist-items"></div>
+                        </div>
+                        <div style="border-top:1px dashed #d1d5db; padding-top:6px; display:flex; justify-content:space-between; font-size:11px; font-weight:800;">
+                            <span>GESAMTPREIS FÜR DIANA:</span>
+                            <span style="color:#15803d;">0,00 € (Geburtstagsgeschenk!)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="btn-row">
+                        <button type="button" id="copy-voucher-btn" class="util-btn" style="background:#1f2937; padding:10px 14px;">
+                            <span>📋</span> <span id="copy-btn-text">Gutschein-Text kopieren</span>
+                        </button>
+                        <button type="button" id="open-qr-victory-btn" class="btn-secondary">
+                            <span>📱</span> <span>QR-Geschenkkarte</span>
+                        </button>
+                    </div>
+                    <button type="button" id="play-again-btn" class="btn-primary">
+                        <span>🔄</span> <span>Noch eine Runde fliegen</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- QR-CODE & GIFT CARD GENERATOR MODAL -->
+        <div id="qr-modal" class="overlay-screen hidden">
+            <div class="card-panel" style="max-width:700px;">
+                <div class="card-header">
+                    <div>
+                        <span class="tag-pill">📱 Direkt per Smartphone scannen & verschenken</span>
+                        <h3 style="font-size:20px; font-weight:900;">QR-Code & Druckfertige Geschenkkarte</h3>
+                    </div>
+                    <button type="button" id="close-qr-btn" class="util-btn" style="background:#e5e7eb; color:#111827;">✕ Schließen</button>
+                </div>
+
+                <div class="qr-layout">
+                    <!-- Live QR Code Box -->
+                    <div class="qr-preview-box">
+                        <img id="qr-code-img" alt="QR-Code zum Spiel" crossorigin="anonymous" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=10&data=https%3A%2F%2Ftiiny.host">
+                        <div style="font-size:11px; font-weight:800; color:#14532d; margin-top:8px;">🎂 Scannen für Dianas Spiel</div>
+                        <div style="font-size:10px; color:#6b7280;">Live-Vorschau des QR-Codes</div>
+                    </div>
+
+                    <!-- Instructions & Actions -->
+                    <div>
+                        <div class="settings-group" style="background:#f0fdf4; border-color:#86efac;">
+                            <label>💡 So erstellst du in 30 Sekunden deinen persönlichen Spiel-QR-Code:</label>
+                            <ol style="font-size:12px; color:#1f2937; padding-left:18px; line-height:1.5;">
+                                <li>Klicke auf <strong>„1. Spiel-Datei (.html) herunterladen“</strong>.</li>
+                                <li>Ziehe diese Datei kostenlos auf <strong>tiiny.host</strong> oder <strong>app.netlify.com/drop</strong> (oder nutze oben den „Teilen“-Link).</li>
+                                <li>Füge deinen Link hier unten ein – der <strong>QR-Code</strong> und die <strong>illustrierte Geburtstagskarte (mit Diana & Trudy)</strong> aktualisieren sich sofort!</li>
+                            </ol>
+                        </div>
+
+                        <div class="settings-group">
+                            <label for="qr-url-input">🔗 Öffentlicher Link (URL) zu Dianas Geburtstags-Spiel:</label>
+                            <input type="url" id="qr-url-input" class="text-input" placeholder="https://diana-geburtstag.tiiny.site">
+                        </div>
+
+                        <div class="btn-row" style="margin-top:10px;">
+                            <button type="button" id="download-html-btn" class="btn-secondary" style="background:#e0f2fe; border-color:#38bdf8; color:#0369a1;">
+                                <span>💾</span> <span>1. Spiel-Datei (.html) herunterladen</span>
+                            </button>
+                            <button type="button" id="download-qr-card-btn" class="btn-primary" style="padding:10px 16px; font-size:13px;">
+                                <span>🖼️</span> <span>2. Illustrierte QR-Geschenkkarte (.PNG) laden</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SETTINGS & PHOTO UPLOAD MODAL -->
+        <div id="settings-modal" class="overlay-screen hidden">
+            <div class="card-panel" style="max-width:540px;">
+                <div class="card-header">
+                    <h3 style="font-size:18px; font-weight:900;">📸 Fotos & Spiel-Einstellungen</h3>
+                    <button type="button" id="close-settings-btn" class="util-btn" style="background:#e5e7eb; color:#111827;">✕ Schließen</button>
+                </div>
+
+                <p style="font-size:12.5px; color:#4b5563; margin-bottom:12px;">
+                    Diana (mit kupfer-roten Haaren, Sonnenbrille, Zopfstrick-Pulli & Matcha) und Tigerdackel Trudy sind bereits nach deinen Fotos handgezeichnet integriert! Optional kannst du hier auch eigene Foto-Ausschnitte hochladen.
+                </p>
+
+                <div class="settings-group">
+                    <label>👩‍🦰 Optionales Foto-Porträt für Diana</label>
+                    <input type="file" id="upload-diana" accept="image/*" style="font-size:12px; width:100%;">
+                </div>
+
+                <div class="settings-group">
+                    <label>🐕 Optionales Foto-Porträt für Trudy</label>
+                    <input type="file" id="upload-trudy" accept="image/*" style="font-size:12px; width:100%;">
+                </div>
+
+                <div class="settings-group">
+                    <label for="custom-voucher-input">💌 Persönlicher Gutschein-Text:</label>
+                    <input type="text" id="custom-voucher-input" class="text-input" value="Einlösbar beim nächsten gemeinsamen Buchhandlungs-Shopping (inklusive Iced Matcha Latte)!">
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                    <div class="settings-group">
+                        <label for="difficulty-select">⚖️ Jura-Schwierigkeit</label>
+                        <select id="difficulty-select" class="select-input">
+                            <option value="relaxed">Entspannt (ca. 6–8 Bücher)</option>
+                            <option value="normal" selected>Spannendes Auf & Ab (Ideal)</option>
+                            <option value="staatsexamen">Staatsexamen (Knackig!)</option>
+                        </select>
+                    </div>
+                    <div class="settings-group">
+                        <label for="duration-select">⏱️ Flugdauer (3 Kapitel)</label>
+                        <select id="duration-select" class="select-input">
+                            <option value="45">Kompakt (45 Sek.)</option>
+                            <option value="60" selected>Cinematic (60 Sek.)</option>
+                            <option value="75">Langstrecke (75 Sek.)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="card-footer" style="margin-top:8px;">
+                    <button type="button" id="reset-photos-btn" class="btn-secondary">Handgezeichnete Referenz-Figuren nutzen</button>
+                    <button type="button" id="save-settings-btn" class="btn-primary" style="padding:10px 20px; font-size:14px;">Fertig & Speichern</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Info & Touch Button -->
+    <div class="bottom-bar">
+        <span>✨ <strong>Steuerung:</strong> Tippen / Klick / Leertaste = Flattern. Sammle 🐕 <strong>Tigerdackel Trudy</strong>, 🍵 <strong>Iced Matcha</strong> & 🖋️ <strong>Tattoo-Schild</strong>!</span>
+        <button type="button" id="bottom-flap-btn" class="mobile-flap-btn">🪽 FLATTERN</button>
+    </div>
+
+    <script id="embedded-photo-store">
+        window.__EMBEDDED_DIANA_PHOTO__ = null;
+        window.__EMBEDDED_TRUDY_PHOTO__ = null;
+    </script>
+
+    <script>
+        (function () {
+            "use strict";
+
+            const canvas = document.getElementById('gameCanvas');
+            const ctx = canvas.getContext('2d');
+
+            const GAME_W = 960;
+            const GAME_H = 540;
+            const CEILING_Y = 38;
+            const FLOOR_Y = 486;
+            const MAX_BOOKS = 8;
+
+            let dianaPhotoImg = null;
+            let trudyPhotoImg = null;
+            let dianaDataUrl = window.__EMBEDDED_DIANA_PHOTO__ || null;
+            let trudyDataUrl = window.__EMBEDDED_TRUDY_PHOTO__ || null;
+
+            // Universal Cross-Browser Rounded Rectangle Helper
+            function drawRoundRect(context, x, y, w, h, radius) {
+                const r = Math.max(0, Math.min(radius, w / 2, h / 2));
+                context.beginPath();
+                context.moveTo(x + r, y);
+                context.arcTo(x + w, y, x + w, y + h, r);
+                context.arcTo(x + w, y + h, x, y + h, r);
+                context.arcTo(x, y + h, x, y, r);
+                context.arcTo(x, y, x + w, y, r);
+                context.closePath();
+            }
+
+            // ============================================================================
+            // BULLETPROOF PROCEDURAL WEB AUDIO ENGINE
+            // ============================================================================
+            class ProceduralAudioEngine {
+                constructor() {
+                    this.ctx = null;
+                    this.muted = false;
+                    this.isPlayingMusic = false;
+                    this.stepIndex = 0;
+                    this.musicInterval = null;
+                }
+
+                init() {
+                    try {
+                        if (!this.ctx) {
+                            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                            if (AudioCtx) {
+                                this.ctx = new AudioCtx();
+                            }
+                        }
+                        if (this.ctx && this.ctx.state === 'suspended') {
+                            this.ctx.resume().catch(function () {});
+                        }
+                    } catch (e) {}
+                }
+
+                synthNote(freq, type, duration, vol, slideFreq) {
+                    if (this.muted || !this.ctx) return;
+                    try {
+                        const now = this.ctx.currentTime;
+                        const osc = this.ctx.createOscillator();
+                        const gain = this.ctx.createGain();
+                        osc.type = type || 'sine';
+                        osc.frequency.setValueAtTime(Math.max(20, freq), now);
+                        if (slideFreq) {
+                            osc.frequency.exponentialRampToValueAtTime(Math.max(20, slideFreq), now + duration);
+                        }
+                        gain.gain.setValueAtTime(Math.max(0.001, vol || 0.08), now);
+                        gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+                        osc.connect(gain);
+                        gain.connect(this.ctx.destination);
+                        osc.start(now);
+                        osc.stop(now + duration);
+                    } catch (e) {}
+                }
+
+                startMusic() {
+                    try {
+                        this.init();
+                        if (this.isPlayingMusic) return;
+                        this.isPlayingMusic = true;
+                        this.stepIndex = 0;
+                        const self = this;
+                        if (this.musicInterval) clearInterval(this.musicInterval);
+                        this.musicInterval = setInterval(function () {
+                            if (!self.isPlayingMusic || self.muted || !self.ctx || gameState !== 'PLAYING') return;
+                            self.playMusicStep();
+                        }, 240);
+                    } catch (e) {}
+                }
+
+                stopMusic() {
+                    this.isPlayingMusic = false;
+                    if (this.musicInterval) {
+                        clearInterval(this.musicInterval);
+                        this.musicInterval = null;
+                    }
+                }
+
+                playMusicStep() {
+                    try {
+                        const step = this.stepIndex % 16;
+                        let bassNotes = [130.81, 164.81, 146.83, 196.00];
+                        let arpNotes = [523.25, 659.25, 783.99, 987.77, 587.33, 783.99, 880.00, 1046.50];
+
+                        if (currentChapter === 2 && diana.trudyTimer <= 0) {
+                            bassNotes = [110.00, 130.81, 123.47, 146.83];
+                            arpNotes = [440.00, 523.25, 659.25, 587.33, 493.88, 659.25, 523.25, 440.00];
+                        } else if (diana.trudyTimer > 0) {
+                            arpNotes = [587.33, 739.99, 880.00, 1174.66, 659.25, 880.00, 987.77, 1318.51];
+                        }
+
+                        if (step % 4 === 0) {
+                            const bFreq = bassNotes[Math.floor(step / 4) % bassNotes.length];
+                            this.synthNote(bFreq, 'triangle', 0.38, 0.035);
+                        }
+
+                        if (step % 2 === 0 || diana.trudyTimer > 0) {
+                            const aFreq = arpNotes[step % arpNotes.length];
+                            const wave = diana.matchaTimer > 0 ? 'sine' : 'triangle';
+                            this.synthNote(aFreq, wave, 0.16, 0.022);
+                        }
+                        this.stepIndex++;
+                    } catch (e) {}
+                }
+
+                flap() {
+                    if (this.muted) return;
+                    this.init();
+                    this.synthNote(270, 'sine', 0.12, 0.085, 450);
+                }
+
+                collectBook(count) {
+                    if (this.muted) return;
+                    this.init();
+                    const self = this;
+                    const factor = 1 + (Math.min(8, count) * 0.06);
+                    this.synthNote(523.25 * factor, 'triangle', 0.1, 0.11);
+                    setTimeout(function () { self.synthNote(659.25 * factor, 'triangle', 0.12, 0.11); }, 55);
+                    setTimeout(function () { self.synthNote(783.99 * factor, 'sine', 0.18, 0.12); }, 115);
+                }
+
+                gavelHit() {
+                    if (this.muted) return;
+                    this.init();
+                    const self = this;
+                    this.synthNote(145, 'sawtooth', 0.24, 0.14, 58);
+                    setTimeout(function () { self.synthNote(190, 'square', 0.15, 0.1, 85); }, 85);
+                }
+
+                bark() {
+                    if (this.muted) return;
+                    this.init();
+                    const self = this;
+                    this.synthNote(440, 'square', 0.08, 0.1, 640);
+                    setTimeout(function () { self.synthNote(500, 'square', 0.1, 0.1, 710); }, 90);
+                }
+
+                matchaZen() {
+                    if (this.muted) return;
+                    this.init();
+                    const self = this;
+                    this.synthNote(350, 'sine', 0.15, 0.1, 590);
+                    setTimeout(function () { self.synthNote(528, 'sine', 0.42, 0.11); }, 110);
+                }
+
+                tattooBuzz() {
+                    if (this.muted) return;
+                    this.init();
+                    const self = this;
+                    this.synthNote(118, 'sawtooth', 0.2, 0.08, 128);
+                    setTimeout(function () { self.synthNote(659.25, 'triangle', 0.24, 0.11, 880); }, 160);
+                }
+
+                fireworkPop() {
+                    if (this.muted) return;
+                    this.init();
+                    this.synthNote(280 + Math.random() * 220, 'sine', 0.14, 0.045, 95);
+                }
+
+                victoryFanfare() {
+                    if (this.muted) return;
+                    this.init();
+                    const self = this;
+                    const notes = [
+                        { f: 523.25, d: 0.18, t: 0 },
+                        { f: 523.25, d: 0.18, t: 200 },
+                        { f: 587.33, d: 0.32, t: 400 },
+                        { f: 523.25, d: 0.32, t: 750 },
+                        { f: 698.46, d: 0.32, t: 1100 },
+                        { f: 659.25, d: 0.6, t: 1450 }
+                    ];
+                    notes.forEach(function (n) {
+                        setTimeout(function () { self.synthNote(n.f, 'triangle', n.d, 0.14); }, n.t);
+                    });
+                }
+            }
+
+            const audio = new ProceduralAudioEngine();
+
+            // ============================================================================
+            // GAME STATE & ENTITIES (100% PLAYER CONTROL UNTIL CROSSING FINISH ARCH)
+            // ============================================================================
+            let gameState = 'START'; // 'START', 'PLAYING', 'VICTORY'
+            let difficulty = 'normal';
+            let totalDuration = 60;
+            let elapsed = 0;
+            let currentChapter = 1;
+            let booksCount = 2;
+            let stats = { collected: 2, lost: 0, trudyUses: 0 };
+
+            let screenShake = 0;
+            let lightningAlpha = 0;
+
+            const diana = {
+                x: 215,
+                y: 250,
+                r: 24,
+                vy: 0,
+                gravity: 880,
+                flapImpulse: -325,
+                wingAngle: 0,
+                invincibleTimer: 0,
+                trudyTimer: 0,
+                matchaTimer: 0,
+                hasInkShield: false,
+                trailHistory: []
+            };
+
+            let pillars = [];
+            let items = [];
+            let lostBooks = [];
+            let sonicRings = [];
+            let speechBubbles = [];
+            let particles = [];
+            let floatingTexts = [];
+            let bgStars = [];
+            let bgClouds = [];
+            let bgBuildings = [];
+            let finishArchX = null;
+
+            let nextPillarTimer = 1.6;
+            let nextBookTimer = 0.85;
+            let nextPowerupTimer = 4.8;
+            let nextFireworkTimer = 0.7;
+
+            const BOOK_COLORS = ['#dc2626', '#16a34a', '#2563eb', '#9333ea', '#d97706', '#db2777', '#0d9488', '#eab308'];
+            const JURA_QUIPS = [
+                'Einspruch! § 823 BGB!',
+                'Schönfelder-Stress! -1 Buch',
+                'Klausur-Korrektur! ⚖️',
+                'Habersack-Kollision §!',
+                'Prüfungsschema vergessen!'
+            ];
+
+            function initWorldDecor() {
+                bgStars = [];
+                for (let i = 0; i < 60; i++) {
+                    bgStars.push({
+                        x: Math.random() * GAME_W,
+                        y: CEILING_Y + 10 + Math.random() * (FLOOR_Y - CEILING_Y - 110),
+                        r: 1 + Math.random() * 2,
+                        twinkle: Math.random() * Math.PI * 2
+                    });
+                }
+                bgClouds = [];
+                for (let i = 0; i < 6; i++) {
+                    bgClouds.push({
+                        x: i * 175 + Math.random() * 40,
+                        y: 65 + Math.random() * 140,
+                        scale: 0.65 + Math.random() * 0.45,
+                        speed: 22 + Math.random() * 14
+                    });
+                }
+                bgBuildings = [];
+                for (let i = 0; i < 7; i++) {
+                    bgBuildings.push({
+                        x: i * 170,
+                        type: i % 3
+                    });
+                }
+            }
+            initWorldDecor();
+
+            function showChapterBanner(subtitle, title) {
+                const banner = document.getElementById('chapter-banner');
+                document.getElementById('chapter-subtitle').textContent = subtitle;
+                document.getElementById('chapter-title').textContent = title;
+                banner.classList.add('visible');
+                setTimeout(function () {
+                    banner.classList.remove('visible');
+                }, 3100);
+            }
+
+            function renderHudBookSlots() {
+                const container = document.getElementById('book-slots-container');
+                container.innerHTML = '';
+                const icons = ['📕', '📗', '📘', '📙', '📓', '📕', '📗', '📘'];
+                for (let i = 0; i < MAX_BOOKS; i++) {
+                    const span = document.createElement('span');
+                    span.className = 'book-slot-icon' + (i < booksCount ? ' active' : '');
+                    span.textContent = icons[i];
+                    container.appendChild(span);
+                }
+                document.getElementById('book-count-text').textContent = String(booksCount);
+                document.getElementById('top-book-counter').textContent = booksCount + ' / ' + MAX_BOOKS;
+            }
+
+            function updatePowerupHUD() {
+                const shieldEl = document.getElementById('hud-shield');
+                const shieldVig = document.getElementById('shield-vignette');
+                if (diana.hasInkShield) {
+                    shieldEl.classList.remove('hidden');
+                    shieldVig.style.opacity = '1';
+                } else {
+                    shieldEl.classList.add('hidden');
+                    shieldVig.style.opacity = '0';
+                }
+
+                const matchaEl = document.getElementById('hud-matcha');
+                const matchaVig = document.getElementById('matcha-vignette');
+                if (diana.matchaTimer > 0) {
+                    matchaEl.classList.remove('hidden');
+                    document.getElementById('matcha-timer-text').textContent = Math.ceil(diana.matchaTimer) + 's';
+                    matchaVig.style.opacity = '1';
+                } else {
+                    matchaEl.classList.add('hidden');
+                    matchaVig.style.opacity = '0';
+                }
+
+                const trudyEl = document.getElementById('hud-trudy');
+                const trudyVig = document.getElementById('trudy-vignette');
+                if (diana.trudyTimer > 0) {
+                    trudyEl.classList.remove('hidden');
+                    document.getElementById('trudy-timer-text').textContent = Math.ceil(diana.trudyTimer) + 's';
+                    trudyVig.style.opacity = '1';
+                } else {
+                    trudyEl.classList.add('hidden');
+                    trudyVig.style.opacity = '0';
+                }
+            }
+
+            function triggerHitVignette() {
+                const hitVig = document.getElementById('hit-vignette');
+                hitVig.style.opacity = '1';
+                if (currentChapter === 2) {
+                    lightningAlpha = 0.35;
+                }
+                setTimeout(function () {
+                    hitVig.style.opacity = '0';
+                }, 300);
+            }
+
+            function addSpeechBubble(text, duration) {
+                speechBubbles = [{ text: text, life: duration || 2.0 }];
+            }
+
+            function addFloatingText(x, y, text, color, size) {
+                floatingTexts.push({
+                    x: x,
+                    y: y,
+                    text: text,
+                    color: color || '#ffffff',
+                    size: size || 20,
+                    vy: -50,
+                    alpha: 1,
+                    life: 1.35
+                });
+            }
+
+            function spawnBurst(x, y, color, count) {
+                const n = count || 12;
+                for (let i = 0; i < n; i++) {
+                    particles.push({
+                        x: x,
+                        y: y,
+                        vx: (Math.random() - 0.5) * 260,
+                        vy: (Math.random() - 0.5) * 260,
+                        size: 3.5 + Math.random() * 4.5,
+                        color: color || '#fbbf24',
+                        alpha: 1,
+                        life: 0.45 + Math.random() * 0.4
+                    });
+                }
+            }
+
+            // Start or Restart the Game (Ensures 100% active player control)
+            function startGame() {
+                if (document.activeElement && typeof document.activeElement.blur === 'function') {
+                    document.activeElement.blur();
+                }
+
+                audio.init();
+                booksCount = 2;
+                stats = { collected: 2, lost: 0, trudyUses: 0 };
+                elapsed = 0;
+                currentChapter = 1;
+                finishArchX = null;
+                screenShake = 0;
+                lightningAlpha = 0;
+
+                diana.y = (CEILING_Y + FLOOR_Y) / 2;
+                diana.vy = -180;
+                diana.wingAngle = 0;
+                diana.invincibleTimer = 0;
+                diana.trudyTimer = 0;
+                diana.matchaTimer = 0;
+                diana.hasInkShield = false;
+                diana.trailHistory = [];
+                for (let i = 0; i < 100; i++) {
+                    diana.trailHistory.push({ x: diana.x, y: diana.y });
+                }
+
+                pillars = [];
+                items = [];
+                lostBooks = [];
+                sonicRings = [];
+                speechBubbles = [];
+                particles = [];
+                floatingTexts = [];
+
+                nextPillarTimer = 1.65;
+                nextBookTimer = 0.75;
+                nextPowerupTimer = 4.6;
+
+                gameState = 'PLAYING';
+                document.getElementById('start-screen').classList.add('hidden');
+                document.getElementById('victory-screen').classList.add('hidden');
+                document.getElementById('settings-modal').classList.add('hidden');
+                document.getElementById('qr-modal').classList.add('hidden');
+                document.getElementById('hud').classList.remove('hidden');
+
+                renderHudBookSlots();
+                updatePowerupHUD();
+                audio.startMusic();
+
+                showChapterBanner('Kapitel I', 'Matcha-Café & Tattoo-Viertel 🍵🖋️');
+                addSpeechBubble('Los geht’s, Diana! Bücher sammeln! 📚', 2.2);
+            }
+
+            function triggerFlap() {
+                if (gameState !== 'PLAYING') return;
+                diana.vy = diana.matchaTimer > 0 ? diana.flapImpulse * 0.84 : diana.flapImpulse;
+                diana.wingAngle = -0.9;
+                audio.flap();
+                spawnBurst(diana.x - 18, diana.y + 8, diana.matchaTimer > 0 ? '#a3e635' : '#fef3c7', 3);
+            }
+
+            // Spawning Logic (Spawns Finish Arch near the end while keeping Diana 100% controllable!)
+            function spawnEntities(dt) {
+                if (elapsed >= totalDuration - 3.2) {
+                    if (finishArchX === null) {
+                        finishArchX = GAME_W + 190;
+                        addSpeechBubble('Der goldene Zielbogen! Flieg hindurch! 🎂🏰', 3.0);
+                    }
+                    return;
+                }
+
+                // 1. Spawn Law Pillars (Jura-Säulen)
+                nextPillarTimer -= dt;
+                if (nextPillarTimer <= 0) {
+                    let gapHeight = 178;
+                    let interval = 2.35;
+
+                    if (difficulty === 'relaxed') {
+                        gapHeight = 202;
+                        interval = 2.65;
+                    } else if (difficulty === 'staatsexamen') {
+                        gapHeight = 152;
+                        interval = 1.95;
+                    }
+
+                    if (currentChapter === 2) gapHeight -= 8;
+                    if (booksCount >= 7) {
+                        gapHeight -= 10;
+                        interval *= 0.9;
+                    }
+
+                    nextPillarTimer = interval + Math.random() * 0.45;
+
+                    const minGapY = CEILING_Y + 64 + gapHeight / 2;
+                    const maxGapY = FLOOR_Y - 64 - gapHeight / 2;
+                    const gapCenterY = minGapY + Math.random() * (maxGapY - minGapY);
+
+                    const labels = [
+                        { top: 'HABERSACK §', bottom: 'SCHÖNFELDER' },
+                        { top: 'BGB KLAUSUR', bottom: 'StGB §§' },
+                        { top: 'SCHULDRECHT', bottom: 'STAATSRECHT' },
+                        { top: 'SACHENRECHT', bottom: 'BGB AT § 823' }
+                    ];
+                    const chosen = labels[Math.floor(Math.random() * labels.length)];
+
+                    const pillarX = GAME_W + 70;
+                    pillars.push({
+                        x: pillarX,
+                        w: 72,
+                        gapY: gapCenterY,
+                        gapH: gapHeight,
+                        topLabel: chosen.top,
+                        bottomLabel: chosen.bottom,
+                        crumbledByTrudy: false,
+                        alreadyHit: false
+                    });
+
+                    // Spawn a book inside the gap
+                    if (Math.random() < 0.85) {
+                        items.push({
+                            type: 'BOOK',
+                            x: pillarX + 36,
+                            y: gapCenterY + (Math.random() - 0.5) * 38,
+                            r: 19,
+                            color: BOOK_COLORS[Math.floor(Math.random() * BOOK_COLORS.length)],
+                            bobPhase: Math.random() * Math.PI * 2
+                        });
+                    }
+                }
+
+                // 2. Spawn Floating Books
+                nextBookTimer -= dt;
+                if (nextBookTimer <= 0) {
+                    nextBookTimer = (booksCount < 4 ? 1.35 : 1.85) + Math.random() * 0.75;
+                    items.push({
+                        type: 'BOOK',
+                        x: GAME_W + 50,
+                        y: CEILING_Y + 75 + Math.random() * (FLOOR_Y - CEILING_Y - 150),
+                        r: 19,
+                        color: BOOK_COLORS[Math.floor(Math.random() * BOOK_COLORS.length)],
+                        bobPhase: Math.random() * Math.PI * 2
+                    });
+                }
+
+                // 3. Spawn Power-Ups (Trudy, Iced Matcha, Tattoo Shield)
+                nextPowerupTimer -= dt;
+                if (nextPowerupTimer <= 0) {
+                    nextPowerupTimer = 6.0 + Math.random() * 2.2;
+                    const roll = Math.random();
+                    let pType = 'TRUDY';
+                    if (roll > 0.46 && roll <= 0.75) pType = 'MATCHA';
+                    else if (roll > 0.75) pType = 'TATTOO';
+
+                    items.push({
+                        type: pType,
+                        x: GAME_W + 50,
+                        y: CEILING_Y + 85 + Math.random() * (FLOOR_Y - CEILING_Y - 170),
+                        r: 22,
+                        bobPhase: Math.random() * Math.PI * 2
+                    });
+                }
+            }
+
+            // Update Physics & Collisions
+            function updateGame(dt) {
+                if (gameState !== 'PLAYING') return;
+
+                elapsed += dt;
+                const scrollSpeed = diana.matchaTimer > 0 ? 215 : 265;
+
+                // 3-Chapter Progression
+                const c1End = totalDuration * 0.34;
+                const c2End = totalDuration * 0.68;
+                if (currentChapter === 1 && elapsed >= c1End) {
+                    currentChapter = 2;
+                    showChapterBanner('Kapitel II', 'Die Jura-Bibliothek des Schreckens ⚖️⚡');
+                    addSpeechBubble('Achtung, Habersack-Säulen! ⚡§', 2.4);
+                } else if (currentChapter === 2 && elapsed >= c2End) {
+                    currentChapter = 3;
+                    showChapterBanner('Kapitel III', 'Goldener Geburtstags-Endspurt 🎆🎂');
+                    addSpeechBubble('Endspurt zum goldenen Zielbogen! 🎇', 2.4);
+                }
+
+                if (screenShake > 0) screenShake = Math.max(0, screenShake - dt * 28);
+                if (lightningAlpha > 0) lightningAlpha = Math.max(0, lightningAlpha - dt * 1.4);
+
+                // Update HUD & Top Bar Progress (0% to 100%)
+                let pct = Math.min(99, Math.floor((elapsed / totalDuration) * 100));
+                if (finishArchX !== null && finishArchX <= diana.x + 20) pct = 100;
+                document.getElementById('progress-fill').style.width = Math.max(4, pct) + '%';
+                document.getElementById('time-left-label').textContent = '🎂 Ziel: ' + pct + '%';
+                document.getElementById('top-progress-pct').textContent = pct + '%';
+
+                // Power-up Timers
+                if (diana.invincibleTimer > 0) diana.invincibleTimer -= dt;
+                if (diana.trudyTimer > 0) {
+                    diana.trudyTimer -= dt;
+                    if (diana.trudyTimer <= 0) diana.trudyTimer = 0;
+                    updatePowerupHUD();
+                }
+                if (diana.matchaTimer > 0) {
+                    diana.matchaTimer -= dt;
+                    if (diana.matchaTimer <= 0) diana.matchaTimer = 0;
+                    updatePowerupHUD();
+                }
+
+                // Diana Movement & Safe Bounce Boundaries (100% responsive until crossing Finish Arch!)
+                const grav = diana.matchaTimer > 0 ? diana.gravity * 0.60 : diana.gravity;
+                diana.vy += grav * dt;
+                diana.vy = Math.min(diana.vy, 420);
+                diana.y += diana.vy * dt;
+                diana.wingAngle += (0.42 - diana.wingAngle) * 6 * dt;
+
+                if (diana.y < CEILING_Y + diana.r) {
+                    diana.y = CEILING_Y + diana.r;
+                    diana.vy = 60;
+                }
+                if (diana.y > FLOOR_Y - diana.r) {
+                    diana.y = FLOOR_Y - diana.r;
+                    diana.vy = -230;
+                    spawnBurst(diana.x, FLOOR_Y, '#7fa668', 4);
+                }
+
+                // Update Trailing Book Chain History
+                diana.trailHistory.unshift({ x: diana.x, y: diana.y });
+                if (diana.trailHistory.length > 115) diana.trailHistory.pop();
+
+                // Parallax Background
+                for (let i = 0; i < bgClouds.length; i++) {
+                    bgClouds[i].x -= bgClouds[i].speed * dt;
+                    if (bgClouds[i].x < -130) bgClouds[i].x = GAME_W + 80;
+                }
+                for (let i = 0; i < bgBuildings.length; i++) {
+                    bgBuildings[i].x -= scrollSpeed * 0.36 * dt;
+                    if (bgBuildings[i].x < -170) bgBuildings[i].x += 7 * 170;
+                }
+
+                // Chapter 3 Fireworks
+                if (currentChapter === 3) {
+                    nextFireworkTimer -= dt;
+                    if (nextFireworkTimer <= 0) {
+                        nextFireworkTimer = 0.6 + Math.random() * 0.7;
+                        const fx = 180 + Math.random() * (GAME_W - 260);
+                        const fy = 70 + Math.random() * 160;
+                        const cols = ['#fbbf24', '#f472b6', '#a3e635', '#38bdf8', '#c084fc'];
+                        spawnBurst(fx, fy, cols[Math.floor(Math.random() * cols.length)], 16);
+                        audio.fireworkPop();
+                    }
+                }
+
+                spawnEntities(dt);
+
+                // Full-Height Finish Arch Arrival (Cross at any height with 100% control!)
+                if (finishArchX !== null) {
+                    finishArchX -= scrollSpeed * dt;
+                    if (finishArchX <= diana.x + 15) {
+                        document.getElementById('progress-fill').style.width = '100%';
+                        document.getElementById('top-progress-pct').textContent = '100%';
+                        completeAdventure();
+                        return;
+                    }
+                }
+
+                // Update Collectible Items
+                for (let i = items.length - 1; i >= 0; i--) {
+                    const it = items[i];
+                    it.bobPhase += dt * 4;
+
+                    // Trudy Book Magnet
+                    if (it.type === 'BOOK' && diana.trudyTimer > 0 && it.x < diana.x + 420 && it.x > diana.x - 60) {
+                        it.x += (diana.x - it.x) * 9.5 * dt;
+                        it.y += (diana.y - it.y) * 9.5 * dt;
+                    } else {
+                        it.x -= scrollSpeed * dt;
+                    }
+
+                    const dx = diana.x - it.x;
+                    const dy = diana.y - (it.y + Math.sin(it.bobPhase) * 6);
+                    if (Math.hypot(dx, dy) < diana.r + it.r + 6) {
+                        handleItemPickup(it);
+                        items.splice(i, 1);
+                        continue;
+                    }
+                    if (it.x < -80) items.splice(i, 1);
+                }
+
+                // Update Jura Pillars
+                for (let i = pillars.length - 1; i >= 0; i--) {
+                    const p = pillars[i];
+                    p.x -= scrollSpeed * dt;
+
+                    // Trudy Sonic Bark blasts pillars wide open!
+                    if (diana.trudyTimer > 0 && !p.crumbledByTrudy && p.x < diana.x + 255 && p.x + p.w > diana.x) {
+                        p.crumbledByTrudy = true;
+                        p.gapH = 360;
+                        audio.bark();
+                        sonicRings.push({
+                            x: diana.x + 76,
+                            y: diana.y - 8,
+                            r: 12,
+                            maxR: 150,
+                            alpha: 1
+                        });
+                        spawnBurst(p.x + p.w / 2, p.gapY - 90, '#fbbf24', 14);
+                        spawnBurst(p.x + p.w / 2, p.gapY + 90, '#f472b6', 14);
+                        addFloatingText(diana.x + 85, diana.y - 45, 'Wuff! Trudy schiebt § weg! 🐕💥', '#fbbf24', 19);
+                    }
+
+                    // Check Pillar Collision
+                    const topEdge = p.gapY - p.gapH / 2;
+                    const botEdge = p.gapY + p.gapH / 2;
+                    const withinX = (diana.x + diana.r - 6 > p.x) && (diana.x - diana.r + 6 < p.x + p.w);
+                    const hitTop = (diana.y - diana.r + 6 < topEdge);
+                    const hitBot = (diana.y + diana.r - 6 > botEdge);
+
+                    if (withinX && (hitTop || hitBot) && !p.alreadyHit && diana.invincibleTimer <= 0) {
+                        p.alreadyHit = true;
+                        handleJuraCollision(p);
+                    }
+
+                    if (p.x + p.w < -100) pillars.splice(i, 1);
+                }
+
+                // Update Lost Books
+                for (let i = lostBooks.length - 1; i >= 0; i--) {
+                    const lb = lostBooks[i];
+                    lb.x += lb.vx * dt;
+                    lb.y += lb.vy * dt;
+                    lb.vy += 680 * dt;
+                    lb.rot += lb.vRot * dt;
+                    if (lb.y > GAME_H + 60) lostBooks.splice(i, 1);
+                }
+
+                // Update Sonic Rings
+                for (let i = sonicRings.length - 1; i >= 0; i--) {
+                    const sr = sonicRings[i];
+                    sr.r += 330 * dt;
+                    sr.alpha = Math.max(0, 1 - sr.r / sr.maxR);
+                    if (sr.r >= sr.maxR) sonicRings.splice(i, 1);
+                }
+
+                // Update Speech Bubbles
+                for (let i = speechBubbles.length - 1; i >= 0; i--) {
+                    speechBubbles[i].life -= dt;
+                    if (speechBubbles[i].life <= 0) speechBubbles.splice(i, 1);
+                }
+
+                // Update Particles
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const pt = particles[i];
+                    pt.x += pt.vx * dt;
+                    pt.y += pt.vy * dt;
+                    pt.life -= dt;
+                    pt.alpha = Math.max(0, pt.life * 2);
+                    if (pt.life <= 0) particles.splice(i, 1);
+                }
+
+                // Update Floating Texts
+                for (let i = floatingTexts.length - 1; i >= 0; i--) {
+                    const ft = floatingTexts[i];
+                    ft.y += ft.vy * dt;
+                    ft.life -= dt;
+                    ft.alpha = Math.min(1, ft.life * 1.5);
+                    if (ft.life <= 0) floatingTexts.splice(i, 1);
+                }
+            }
+
+            function handleItemPickup(it) {
+                if (it.type === 'BOOK') {
+                    if (booksCount < MAX_BOOKS) {
+                        booksCount++;
+                        stats.collected++;
+                        audio.collectBook(booksCount);
+                        renderHudBookSlots();
+                        spawnBurst(it.x, it.y, '#fbbf24', 14);
+                        addFloatingText(diana.x + 20, diana.y - 44, '+1 Buch! (' + booksCount + '/8) 📚', '#4ade80', 21);
+                    } else {
+                        audio.collectBook(8);
+                        spawnBurst(it.x, it.y, '#fbbf24', 18);
+                        addFloatingText(diana.x + 20, diana.y - 44, 'MAXIMAL 8/8 BÜCHER! 👑📚', '#facc15', 20);
+                    }
+                } else if (it.type === 'TRUDY') {
+                    diana.trudyTimer = 7.0;
+                    stats.trudyUses++;
+                    audio.bark();
+                    updatePowerupHUD();
+                    spawnBurst(it.x, it.y, '#f59e0b', 20);
+                    addFloatingText(diana.x + 30, diana.y - 50, '🐕 TRUDY-POWER! (7s Magnet & §-Schutz)', '#fbbf24', 21);
+                    addSpeechBubble('Wuff! Tigerdackel Trudy hilft dir! 🐕❤️', 2.5);
+                } else if (it.type === 'MATCHA') {
+                    diana.matchaTimer = 6.0;
+                    audio.matchaZen();
+                    updatePowerupHUD();
+                    spawnBurst(it.x, it.y, '#a3e635', 16);
+                    addFloatingText(diana.x + 25, diana.y - 46, '🍵 Matcha-Fokus! (6s Gleitflug)', '#a3e635', 20);
+                    addSpeechBubble('Mmmh, Iced Matcha Latte! 🍵✨', 2.2);
+                } else if (it.type === 'TATTOO') {
+                    diana.hasInkShield = true;
+                    audio.tattooBuzz();
+                    updatePowerupHUD();
+                    spawnBurst(it.x, it.y, '#c084fc', 16);
+                    addFloatingText(diana.x + 25, diana.y - 46, '🖋️ Tattoo-Schild! (Blockt 1x §)', '#c084fc', 20);
+                    addSpeechBubble('Florales Tattoo-Schild aktiv! 🖋️💜', 2.2);
+                }
+            }
+
+            function handleJuraCollision(pillar) {
+                // Gently nudge Diana toward the safe center of the gap
+                diana.y += (pillar.gapY - diana.y) * 0.52;
+                diana.vy = -145;
+
+                if (diana.hasInkShield) {
+                    diana.hasInkShield = false;
+                    diana.invincibleTimer = 1.5;
+                    pillar.crumbledByTrudy = true;
+                    pillar.gapH = 360;
+                    audio.tattooBuzz();
+                    updatePowerupHUD();
+                    spawnBurst(diana.x + 20, diana.y, '#c084fc', 20);
+                    addFloatingText(diana.x + 20, diana.y - 45, '🖋️ Tattoo-Schild blockt §-Turm ab!', '#c084fc', 20);
+                    return;
+                }
+
+                screenShake = 8;
+                diana.invincibleTimer = 1.5;
+                triggerHitVignette();
+                audio.gavelHit();
+                spawnBurst(diana.x + 20, diana.y, '#ef4444', 18);
+
+                const quip = JURA_QUIPS[Math.floor(Math.random() * JURA_QUIPS.length)];
+                addSpeechBubble(quip, 2.3);
+
+                if (booksCount > 0) {
+                    booksCount--;
+                    stats.lost++;
+                    renderHudBookSlots();
+
+                    lostBooks.push({
+                        x: diana.x - 24,
+                        y: diana.y,
+                        vx: -135 - Math.random() * 60,
+                        vy: -310,
+                        rot: 0,
+                        vRot: -8,
+                        color: BOOK_COLORS[booksCount % BOOK_COLORS.length]
+                    });
+
+                    addFloatingText(diana.x + 20, diana.y - 48, '-1 Buch! (' + quip + ')', '#f87171', 20);
+                } else {
+                    addFloatingText(diana.x + 20, diana.y - 48, 'Richterhammer! (0 Bücher Minimum)', '#f87171', 19);
+                }
+            }
+
+            function completeAdventure() {
+                gameState = 'VICTORY';
+                audio.stopMusic();
+                audio.victoryFanfare();
+                document.getElementById('hud').classList.add('hidden');
+                document.getElementById('matcha-vignette').style.opacity = '0';
+                document.getElementById('trudy-vignette').style.opacity = '0';
+                document.getElementById('shield-vignette').style.opacity = '0';
+
+                booksCount = Math.max(0, Math.min(MAX_BOOKS, booksCount));
+                renderHudBookSlots();
+
+                const headline = document.getElementById('victory-headline');
+                const subtext = document.getElementById('victory-subtext');
+                headline.textContent = '🎉 ' + booksCount + ' von 8 Büchern erspielt!';
+
+                if (booksCount === MAX_BOOKS) {
+                    subtext.textContent = 'PERFEKTER JACKPOT! Du hast den Jura-Sturm gemeistert und alle 8 Maximal-Bücher durch den goldenen Zielbogen gebracht!';
+                } else if (booksCount >= 5) {
+                    subtext.textContent = 'Starke Leistung! Mit Iced Matcha und Tigerdackel Trudys Hilfe hast du ' + booksCount + ' echte Wunschbücher ins Ziel gerettet!';
+                } else if (booksCount >= 1) {
+                    subtext.textContent = 'Ein spannendes Auf und Ab durch die Habersack-Säulen! Diese ' + booksCount + ' Bücher werden dir beim nächsten Buchhandlungs-Bummel gekauft!';
+                } else {
+                    subtext.textContent = 'Die Jura-Säulen waren heute gnadenlos (0 Bücher) – flieg direkt noch eine Runde, um deinen Bücherkorb bis auf 8 zu füllen!';
+                }
+
+                document.getElementById('final-book-count').textContent = String(booksCount);
+                document.getElementById('stat-collected').textContent = String(stats.collected);
+                document.getElementById('stat-lost').textContent = String(stats.lost);
+                document.getElementById('stat-trudy').textContent = String(stats.trudyUses);
+
+                // Populate Interactive Bookstore Receipt ("Buchhandlungs-Bon") dynamically with 1..N won books
+                const checklist = document.getElementById('receipt-checklist');
+                checklist.innerHTML = '';
+                const countToRender = Math.max(1, booksCount);
+                for (let i = 0; i < countToRender; i++) {
+                    const won = i < booksCount;
+                    const row = document.createElement('div');
+                    row.className = 'wishlist-row' + (won ? '' : ' locked');
+                    row.innerHTML =
+                        '<div style="display:flex; align-items:center; gap:6px; flex:1;">' +
+                            '<input type="checkbox" ' + (won ? '' : 'disabled') + ' style="cursor:pointer;">' +
+                            '<span>📚</span>' +
+                            '<input type="text" class="wishlist-input" ' + (won ? '' : 'disabled') + ' placeholder="' + (won ? 'Wunschbuch #' + (i + 1) + ' Titel eintragen...' : 'Noch erspielen...') + '">' +
+                        '</div>' +
+                        '<span style="font-size:10px; font-weight:800; color:' + (won ? '#15803d' : '#9ca3af') + ';">' + (won ? 'GUTSCHEIN #' + (i + 1) : '0 BÜCHER') + '</span>';
+                    checklist.appendChild(row);
+                }
+
+                document.getElementById('victory-screen').classList.remove('hidden');
+            }
+
+            // ============================================================================
+            // CANVAS RENDERING (MATCHING REFERENCE PHOTOS OF DIANA & TRUDY)
+            // ============================================================================
+            function drawScene() {
+                ctx.save();
+
+                if (screenShake > 0) {
+                    ctx.translate((Math.random() - 0.5) * screenShake, (Math.random() - 0.5) * screenShake);
+                }
+
+                // 1. Dynamic 3-Chapter Sky
+                const skyGrad = ctx.createLinearGradient(0, 0, 0, FLOOR_Y);
+                if (currentChapter === 1) {
+                    skyGrad.addColorStop(0, '#3f624d');
+                    skyGrad.addColorStop(0.55, '#dfa885');
+                    skyGrad.addColorStop(1, '#f5e4d3');
+                } else if (currentChapter === 2) {
+                    skyGrad.addColorStop(0, '#1e1b4b');
+                    skyGrad.addColorStop(0.55, '#3b0764');
+                    skyGrad.addColorStop(1, '#4c1d95');
+                } else {
+                    skyGrad.addColorStop(0, '#090d16');
+                    skyGrad.addColorStop(0.6, '#1e293b');
+                    skyGrad.addColorStop(1, '#3b2f4a');
+                }
+                ctx.fillStyle = skyGrad;
+                ctx.fillRect(0, 0, GAME_W, GAME_H);
+
+                // Subtle Chapter II lightning flash on hit (warm violet/gold, never blue)
+                if (lightningAlpha > 0) {
+                    ctx.fillStyle = 'rgba(253, 224, 71, ' + lightningAlpha.toFixed(2) + ')';
+                    ctx.fillRect(0, CEILING_Y, GAME_W, FLOOR_Y - CEILING_Y);
+                }
+
+                // 2. Stars in Chapters 2 & 3
+                if (currentChapter >= 2) {
+                    for (let i = 0; i < bgStars.length; i++) {
+                        const s = bgStars[i];
+                        const alpha = 0.35 + Math.sin(elapsed * 3 + s.twinkle) * 0.35;
+                        ctx.fillStyle = 'rgba(254, 240, 138, ' + alpha.toFixed(2) + ')';
+                        ctx.beginPath();
+                        ctx.arc(s.x, s.y, Math.max(0.5, s.r), 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                // 3. Clouds
+                for (let i = 0; i < bgClouds.length; i++) {
+                    const c = bgClouds[i];
+                    ctx.save();
+                    ctx.translate(c.x, c.y);
+                    ctx.scale(c.scale, c.scale);
+                    ctx.fillStyle = currentChapter === 1 ? 'rgba(255, 248, 240, 0.65)' : 'rgba(148, 163, 184, 0.2)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 26, 0, Math.PI * 2);
+                    ctx.arc(24, -8, 32, 0, Math.PI * 2);
+                    ctx.arc(52, 0, 24, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+
+                // 4. Background Buildings
+                for (let i = 0; i < bgBuildings.length; i++) {
+                    drawBackgroundBuilding(bgBuildings[i]);
+                }
+
+                // 5. Law Pillars
+                for (let i = 0; i < pillars.length; i++) {
+                    drawLawPillar(pillars[i]);
+                }
+
+                // 6. Full-Height Finish Arch & Birthday Castle
+                if (finishArchX !== null) {
+                    drawFinishArchAndCastle(finishArchX);
+                }
+
+                // 7. Ceiling & Floor
+                drawCeilingAndFloor();
+
+                // 8. Collectibles
+                for (let i = 0; i < items.length; i++) {
+                    drawItem(items[i]);
+                }
+
+                // 9. Trailing Book Chain behind Diana
+                drawTrailingBookChain();
+
+                // 10. Lost Books tumbling away
+                for (let i = 0; i < lostBooks.length; i++) {
+                    const lb = lostBooks[i];
+                    ctx.save();
+                    ctx.translate(lb.x, lb.y);
+                    ctx.rotate(lb.rot);
+                    ctx.fillStyle = lb.color;
+                    ctx.fillRect(-13, -15, 26, 30);
+                    ctx.fillStyle = '#fef3c7';
+                    ctx.fillRect(-9, -11, 18, 5);
+                    ctx.restore();
+                }
+
+                // 11. Trudy Sonic Bark Rings ("Wuff!")
+                for (let i = 0; i < sonicRings.length; i++) {
+                    const sr = sonicRings[i];
+                    ctx.save();
+                    ctx.strokeStyle = 'rgba(251, 191, 36, ' + sr.alpha.toFixed(2) + ')';
+                    ctx.lineWidth = 4;
+                    ctx.beginPath();
+                    ctx.arc(sr.x, sr.y, Math.max(1, sr.r), -Math.PI * 0.4, Math.PI * 0.4);
+                    ctx.stroke();
+                    ctx.restore();
+                }
+
+                // 12. Flying Dapple Dachshund Trudy Companion
+                if (diana.trudyTimer > 0) {
+                    drawFlyingTrudy(diana.x + 76, diana.y - 10);
+                }
+
+                // 13. Flappy Diana (Copper-red hair, sunglasses on head, cream cable-knit sweater, dark tote, Iced Matcha)
+                drawFlappyDiana(diana.x, diana.y);
+
+                // 14. Speech Bubble
+                if (speechBubbles.length > 0) {
+                    drawSpeechBubble(diana.x + 12, diana.y - 58, speechBubbles[0].text);
+                }
+
+                // 15. Particles
+                for (let i = 0; i < particles.length; i++) {
+                    const pt = particles[i];
+                    ctx.save();
+                    ctx.globalAlpha = pt.alpha;
+                    ctx.fillStyle = pt.color;
+                    ctx.beginPath();
+                    ctx.arc(pt.x, pt.y, Math.max(0.5, pt.size), 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+
+                // 16. Floating Texts
+                for (let i = 0; i < floatingTexts.length; i++) {
+                    const ft = floatingTexts[i];
+                    ctx.save();
+                    ctx.globalAlpha = ft.alpha;
+                    ctx.font = '800 ' + ft.size + 'px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.lineWidth = 4;
+                    ctx.strokeStyle = '#0f172a';
+                    ctx.strokeText(ft.text, ft.x, ft.y);
+                    ctx.fillStyle = ft.color;
+                    ctx.fillText(ft.text, ft.x, ft.y);
+                    ctx.restore();
+                }
+
+                ctx.restore();
+            }
+
+            function drawBackgroundBuilding(b) {
+                ctx.save();
+                ctx.translate(b.x, FLOOR_Y - 165);
+                ctx.fillStyle = currentChapter === 1 ? 'rgba(39, 52, 43, 0.36)' : 'rgba(15, 23, 42, 0.55)';
+                drawRoundRect(ctx, 8, 0, 135, 165, 14);
+                ctx.fill();
+
+                if (b.type === 0) {
+                    ctx.fillStyle = 'rgba(163, 230, 53, 0.25)';
+                    ctx.beginPath();
+                    ctx.arc(75, 60, 28, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#ecfccb';
+                    ctx.font = 'bold 10px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('MATCHA CAFÉ', 75, 105);
+                } else if (b.type === 1) {
+                    ctx.strokeStyle = '#f472b6';
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(32, 35, 86, 42);
+                    ctx.fillStyle = '#f472b6';
+                    ctx.font = 'bold 11px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('♥ TATTOO INK ♥', 75, 60);
+                } else {
+                    ctx.fillStyle = 'rgba(251, 191, 36, 0.22)';
+                    for (let r = 0; r < 3; r++) {
+                        ctx.fillRect(28, 30 + r * 40, 94, 6);
+                    }
+                    if (currentChapter === 2) {
+                        ctx.fillStyle = 'rgba(253, 224, 71, 0.35)';
+                        ctx.font = 'bold 20px serif';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('§', 75, 24);
+                    }
+                }
+                ctx.restore();
+            }
+
+            function drawCeilingAndFloor() {
+                ctx.fillStyle = '#1f2937';
+                ctx.fillRect(0, 0, GAME_W, CEILING_Y);
+                ctx.fillStyle = '#d97706';
+                ctx.fillRect(0, CEILING_Y - 3, GAME_W, 3);
+
+                for (let lx = 30; lx < GAME_W; lx += 65) {
+                    ctx.fillStyle = '#fef08a';
+                    ctx.beginPath();
+                    ctx.arc(lx, CEILING_Y + 4, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                ctx.fillStyle = '#4d7c0f';
+                ctx.fillRect(0, FLOOR_Y, GAME_W, 9);
+                ctx.fillStyle = '#18181b';
+                ctx.fillRect(0, FLOOR_Y + 9, GAME_W, GAME_H - FLOOR_Y - 9);
+            }
+
+            function drawTrailingBookChain() {
+                for (let i = 0; i < booksCount; i++) {
+                    const histIdx = Math.min(diana.trailHistory.length - 1, (i + 1) * 10);
+                    if (histIdx < 0 || !diana.trailHistory[histIdx]) continue;
+
+                    const pos = diana.trailHistory[histIdx];
+                    const bookX = diana.x - (i + 1) * 26;
+                    const bookY = pos.y + Math.sin(elapsed * 6 + i) * 4;
+
+                    ctx.save();
+                    ctx.translate(bookX, bookY);
+
+                    ctx.strokeStyle = 'rgba(251, 191, 36, 0.55)';
+                    ctx.lineWidth = 1.6;
+                    ctx.beginPath();
+                    ctx.moveTo(0, 0);
+                    ctx.lineTo(24, 0);
+                    ctx.stroke();
+
+                    ctx.fillStyle = BOOK_COLORS[i % BOOK_COLORS.length];
+                    drawRoundRect(ctx, -9, -11, 18, 22, 3);
+                    ctx.fill();
+                    ctx.fillStyle = '#fef3c7';
+                    ctx.fillRect(-6, -8, 12, 4);
+                    ctx.restore();
+                }
+            }
+
+            function drawLawPillar(p) {
+                const topH = Math.max(0, p.gapY - p.gapH / 2 - CEILING_Y);
+                const botY = p.gapY + p.gapH / 2;
+                const botH = Math.max(0, FLOOR_Y - botY);
+
+                if (topH > 4) {
+                    ctx.save();
+                    ctx.fillStyle = '#991b1b';
+                    ctx.strokeStyle = '#450a0a';
+                    ctx.lineWidth = 3;
+                    drawRoundRect(ctx, p.x, CEILING_Y, p.w, topH, 8);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#fde047';
+                    ctx.fillRect(p.x + 6, CEILING_Y + topH - 28, p.w - 12, 4);
+                    if (topH > 55) {
+                        ctx.font = 'bold 20px serif';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('§', p.x + p.w / 2, CEILING_Y + topH - 36);
+                    }
+                    ctx.fillStyle = '#fecaca';
+                    ctx.font = 'bold 9px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(p.topLabel, p.x + p.w / 2, CEILING_Y + topH - 10);
+                    ctx.restore();
+                }
+
+                if (botH > 4) {
+                    ctx.save();
+                    ctx.fillStyle = '#991b1b';
+                    ctx.strokeStyle = '#450a0a';
+                    ctx.lineWidth = 3;
+                    drawRoundRect(ctx, p.x, botY, p.w, botH, 8);
+                    ctx.fill();
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#fef2f2';
+                    ctx.fillRect(p.x + 6, botY + 6, p.w - 12, 8);
+
+                    ctx.fillStyle = '#fde047';
+                    if (botH > 55) {
+                        ctx.font = 'bold 20px serif';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('§', p.x + p.w / 2, botY + 46);
+                    }
+                    ctx.fillStyle = '#fecaca';
+                    ctx.font = 'bold 9px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(p.bottomLabel, p.x + p.w / 2, botY + 25);
+                    ctx.restore();
+                }
+            }
+
+            // ============================================================================
+            // DIANA SPRITE (FAITHFUL TO PHOTO 1: Copper-Red Hair, Sunglasses on Head,
+            // Lip Piercing, Cream Cable-Knit Sweater, Dark Brown Pants & Tote, Iced Matcha)
+            // ============================================================================
+            function drawFlappyDiana(x, y) {
+                ctx.save();
+                ctx.translate(x, y);
+
+                const tilt = Math.max(-0.32, Math.min(0.36, diana.vy * 0.0009));
+                ctx.rotate(tilt);
+
+                if (diana.invincibleTimer > 0 && Math.floor(diana.invincibleTimer * 12) % 2 === 0) {
+                    ctx.globalAlpha = 0.55;
+                }
+
+                // Floral Tattoo Aura Shield when active
+                if (diana.hasInkShield) {
+                    ctx.save();
+                    ctx.strokeStyle = '#c084fc';
+                    ctx.fillStyle = 'rgba(192, 132, 252, 0.2)';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.arc(0, -2, 44, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+                    ctx.restore();
+                }
+
+                // 1. Flowing Copper/Orange-Red Hair Back Wave
+                const hairWave = Math.sin(elapsed * 8) * 3.5;
+                ctx.fillStyle = '#c2410c';
+                ctx.beginPath();
+                ctx.moveTo(-6, -24);
+                ctx.quadraticCurveTo(-28, -16 + hairWave, -30, 8 + hairWave);
+                ctx.quadraticCurveTo(-18, 14, -4, 4);
+                ctx.closePath();
+                ctx.fill();
+
+                // 2. Flapping Open-Book Wings on Back
+                ctx.save();
+                ctx.translate(-10, -4);
+                ctx.rotate(diana.wingAngle);
+                ctx.fillStyle = '#fef3c7';
+                ctx.strokeStyle = '#d97706';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.ellipse(-15, -6, 18, 8.5, -0.28, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+                ctx.restore();
+
+                // 3. Dark Brown Tailored Pants (Legs)
+                ctx.fillStyle = '#261c1a';
+                drawRoundRect(ctx, -12, 14, 11, 16, 4);
+                ctx.fill();
+                drawRoundRect(ctx, -1, 14, 11, 16, 4);
+                ctx.fill();
+
+                // 4. Dark Brown Shoulder Tote Bag (from photo)
+                ctx.fillStyle = '#2c1d18';
+                ctx.strokeStyle = '#1c120e';
+                ctx.lineWidth = 1.5;
+                drawRoundRect(ctx, -21, 0, 14, 18, 4);
+                ctx.fill();
+                ctx.stroke();
+
+                // 5. Cozy Cream/Off-White Cable-Knit Sweater Torso
+                ctx.fillStyle = '#f5f2eb';
+                ctx.strokeStyle = '#d6d1c4';
+                ctx.lineWidth = 1.8;
+                drawRoundRect(ctx, -14, -6, 28, 23, 9);
+                ctx.fill();
+                ctx.stroke();
+
+                // Cable-knit braided texture lines on sweater
+                ctx.strokeStyle = '#ded8c8';
+                ctx.lineWidth = 1.3;
+                ctx.beginPath();
+                ctx.moveTo(-6, -4);
+                ctx.lineTo(-4, 15);
+                ctx.moveTo(0, -4);
+                ctx.lineTo(2, 15);
+                ctx.moveTo(6, -4);
+                ctx.lineTo(8, 15);
+                ctx.stroke();
+
+                // Tote Bag Shoulder Strap over right shoulder
+                ctx.strokeStyle = '#2c1d18';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(-9, -6);
+                ctx.lineTo(-14, 10);
+                ctx.stroke();
+
+                // 6. Head & Copper-Orange Hair (or Custom Uploaded Photo)
+                if (dianaPhotoImg) {
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.arc(2, -18, 18, 0, Math.PI * 2);
+                    ctx.closePath();
+                    ctx.clip();
+                    ctx.drawImage(dianaPhotoImg, -16, -36, 36, 36);
+                    ctx.restore();
+                    ctx.strokeStyle = '#ea580c';
+                    ctx.lineWidth = 2.5;
+                    ctx.beginPath();
+                    ctx.arc(2, -18, 18, 0, Math.PI * 2);
+                    ctx.stroke();
+                } else {
+                    // Copper crown hair volume
+                    ctx.fillStyle = '#d9531e';
+                    ctx.beginPath();
+                    ctx.arc(1, -19, 16, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Warm Face
+                    ctx.fillStyle = '#f5cba7';
+                    ctx.beginPath();
+                    ctx.arc(3, -17, 13, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Soft blush
+                    ctx.fillStyle = 'rgba(244, 114, 182, 0.35)';
+                    ctx.beginPath();
+                    ctx.arc(9, -14, 2.8, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Expressive dark eyes
+                    ctx.fillStyle = '#1f2937';
+                    ctx.beginPath();
+                    ctx.arc(2, -18, 1.8, 0, Math.PI * 2);
+                    ctx.arc(9, -18, 1.9, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Warm smile
+                    ctx.strokeStyle = '#881337';
+                    ctx.lineWidth = 1.6;
+                    ctx.beginPath();
+                    ctx.arc(6, -13, 3.8, 0.12, Math.PI * 0.82);
+                    ctx.stroke();
+
+                    // Subtle silver lower-lip ring piercing (from photo!)
+                    ctx.fillStyle = '#e2e8f0';
+                    ctx.beginPath();
+                    ctx.arc(6.5, -9.2, 1.2, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Front flowing copper-red hair strands framing face
+                    ctx.fillStyle = '#ea580c';
+                    ctx.beginPath();
+                    ctx.moveTo(2, -32);
+                    ctx.quadraticCurveTo(-11, -26, -9, -4);
+                    ctx.quadraticCurveTo(-5, -16, 2, -29);
+                    ctx.fill();
+
+                    ctx.beginPath();
+                    ctx.moveTo(4, -32);
+                    ctx.quadraticCurveTo(16, -27, 15, -9);
+                    ctx.quadraticCurveTo(12, -20, 4, -29);
+                    ctx.fill();
+
+                    // Sunglasses resting on top of Diana's copper hair!
+                    ctx.fillStyle = '#292524';
+                    ctx.strokeStyle = '#78716c';
+                    ctx.lineWidth = 1.2;
+                    ctx.beginPath();
+                    ctx.ellipse(-3, -32, 5.5, 3.5, -0.15, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.ellipse(7, -32, 5.5, 3.5, 0.15, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+                }
+
+                // 7. Cable-Knit Sleeve + Fine-Line Tattoo + Hand holding Iced Matcha Latte
+                ctx.save();
+                ctx.translate(4, 2);
+                // Cream knit sleeve
+                ctx.fillStyle = '#f5f2eb';
+                drawRoundRect(ctx, -5, -2, 13, 9, 4);
+                ctx.fill();
+                // Forearm with fine-line floral tattoo
+                ctx.fillStyle = '#f5cba7';
+                drawRoundRect(ctx, 5, -1, 10, 7, 3);
+                ctx.fill();
+                ctx.strokeStyle = '#1e293b';
+                ctx.lineWidth = 1.2;
+                ctx.beginPath();
+                ctx.moveTo(6, 2);
+                ctx.quadraticCurveTo(9, 0, 12, 3);
+                ctx.stroke();
+
+                // Transparent Iced Matcha Latte Cup with dark swirl & green straw (from photo!)
+                ctx.fillStyle = '#65a30d';
+                drawRoundRect(ctx, 13, -7, 12, 16, 3);
+                ctx.fill();
+                // Brown syrup/matcha swirl inside cup
+                ctx.fillStyle = 'rgba(69, 26, 3, 0.45)';
+                ctx.fillRect(14, -2, 9, 3);
+                // Clear dome lid & cup outline
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+                ctx.lineWidth = 1.4;
+                drawRoundRect(ctx, 13, -7, 12, 16, 3);
+                ctx.stroke();
+                // Green straw
+                ctx.strokeStyle = '#4d7c0f';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(19, -7);
+                ctx.lineTo(17, -14);
+                ctx.stroke();
+                // Dark red-brown painted nails holding cup
+                ctx.fillStyle = '#450a0a';
+                ctx.beginPath();
+                ctx.arc(14, 0, 1.5, 0, Math.PI * 2);
+                ctx.arc(14, 3, 1.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+
+                ctx.restore();
+            }
+
+            // ============================================================================
+            // TRUDY SPRITE (FAITHFUL TO PHOTO 2: Black/Silver-Grey/Tan Dapple Dachshund
+            // "Tigerdackel" with tan eyebrow dots, tan cheeks/paws, long floppy ears)
+            // ============================================================================
+            function drawFlyingTrudy(x, y) {
+                ctx.save();
+                const bob = Math.sin(elapsed * 8.5) * 6;
+                ctx.translate(x, y + bob);
+
+                // Golden Magnet Aura
+                ctx.fillStyle = 'rgba(251, 191, 36, 0.25)';
+                ctx.beginPath();
+                ctx.ellipse(20, 0, 38, 23, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Shiny Red/Gold Birthday Balloon String & Balloon
+                ctx.strokeStyle = '#fbbf24';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(16, -6);
+                ctx.lineTo(16, -28);
+                ctx.stroke();
+                ctx.fillStyle = '#dc2626';
+                ctx.beginPath();
+                ctx.arc(16, -37, 11.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = 'rgba(255,255,255,0.45)';
+                ctx.beginPath();
+                ctx.arc(12, -40, 3, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Long Dachshund Body (Deep Black Base)
+                ctx.fillStyle = '#18181b';
+                drawRoundRect(ctx, -2, -7, 38, 14, 7);
+                ctx.fill();
+
+                // Silver-Grey Dapple/Merle Patches on Back & Chest ("Tigerdackel")
+                ctx.fillStyle = '#9ca3af';
+                ctx.beginPath();
+                ctx.arc(8, -2, 4, 0, Math.PI * 2);
+                ctx.arc(18, -3, 4.5, 0, Math.PI * 2);
+                ctx.arc(26, 1, 3.5, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Warm Tan/Rust Markings on Chest & Short Dachshund Paws
+                ctx.fillStyle = '#d97706';
+                ctx.beginPath();
+                ctx.arc(32, 2, 4.5, 0, Math.PI * 2);
+                ctx.fill();
+                // Front & Back Tan Paws
+                drawRoundRect(ctx, 2, 5, 6, 6, 2);
+                ctx.fill();
+                drawRoundRect(ctx, 28, 5, 6, 6, 2);
+                ctx.fill();
+
+                // Red Birthday Bandana on Neck
+                ctx.fillStyle = '#dc2626';
+                ctx.beginPath();
+                ctx.moveTo(27, -6);
+                ctx.lineTo(35, -6);
+                ctx.lineTo(32, 3);
+                ctx.closePath();
+                ctx.fill();
+
+                // Head or Custom Photo
+                if (trudyPhotoImg) {
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.arc(37, -9, 13, 0, Math.PI * 2);
+                    ctx.closePath();
+                    ctx.clip();
+                    ctx.drawImage(trudyPhotoImg, 24, -22, 26, 26);
+                    ctx.restore();
+                    ctx.strokeStyle = '#fbbf24';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.arc(37, -9, 13, 0, Math.PI * 2);
+                    ctx.stroke();
+                } else {
+                    // Black & Silver Dapple Head
+                    ctx.fillStyle = '#18181b';
+                    ctx.beginPath();
+                    ctx.arc(35, -9, 9.5, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Snout with Silver-Grey Dapple Bridge & Tan Cheeks
+                    ctx.fillStyle = '#18181b';
+                    drawRoundRect(ctx, 37, -11, 13, 8, 3.5);
+                    ctx.fill();
+                    // Silver dapple on nose bridge
+                    ctx.fillStyle = '#9ca3af';
+                    ctx.fillRect(38, -10.5, 7, 3);
+                    // Tan cheek marking
+                    ctx.fillStyle = '#d97706';
+                    ctx.beginPath();
+                    ctx.arc(41, -5, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                    // Characteristic Tan Eyebrow Dot!
+                    ctx.beginPath();
+                    ctx.arc(38, -13.5, 1.8, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Shiny Black Nose & Eye
+                    ctx.fillStyle = '#09090b';
+                    ctx.beginPath();
+                    ctx.arc(49.5, -8, 2.2, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#ffffff';
+                    ctx.beginPath();
+                    ctx.arc(39.5, -10, 1.6, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Long Floppy Black/Dapple Dachshund Ear
+                    ctx.fillStyle = '#27272a';
+                    ctx.beginPath();
+                    ctx.ellipse(30, -5, 4.8, 9.5, 0.25, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.fillStyle = '#71717a';
+                    ctx.beginPath();
+                    ctx.arc(30, -6, 2.2, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                ctx.restore();
+            }
+
+            // Render Mini Portraits of Diana & Trudy for Start & Voucher Badges
+            function renderMiniPortraits() {
+                const dCanvases = [
+                    document.getElementById('diana-mini-portrait'),
+                    document.getElementById('voucher-diana-canvas')
+                ];
+                dCanvases.forEach(function (c) {
+                    if (!c) return;
+                    const pctx = c.getContext('2d');
+                    pctx.clearRect(0, 0, 96, 96);
+                    pctx.fillStyle = '#ffedd5';
+                    pctx.fillRect(0, 0, 96, 96);
+                    // Copper hair back
+                    pctx.fillStyle = '#d9531e';
+                    pctx.beginPath();
+                    pctx.arc(48, 52, 34, 0, Math.PI * 2);
+                    pctx.fill();
+                    // Cream cable-knit sweater shoulders
+                    pctx.fillStyle = '#f5f2eb';
+                    drawRoundRect(pctx, 20, 68, 56, 30, 12);
+                    pctx.fill();
+                    // Face
+                    pctx.fillStyle = '#f5cba7';
+                    pctx.beginPath();
+                    pctx.arc(48, 48, 22, 0, Math.PI * 2);
+                    pctx.fill();
+                    // Eyes & smile + lip ring
+                    pctx.fillStyle = '#1f2937';
+                    pctx.beginPath();
+                    pctx.arc(41, 46, 2.5, 0, Math.PI * 2);
+                    pctx.arc(55, 46, 2.5, 0, Math.PI * 2);
+                    pctx.fill();
+                    pctx.strokeStyle = '#881337';
+                    pctx.lineWidth = 2;
+                    pctx.beginPath();
+                    pctx.arc(48, 52, 6, 0.15, Math.PI * 0.85);
+                    pctx.stroke();
+                    pctx.fillStyle = '#e2e8f0';
+                    pctx.beginPath();
+                    pctx.arc(50, 58, 1.8, 0, Math.PI * 2);
+                    pctx.fill();
+                    // Copper bangs & sunglasses on head
+                    pctx.fillStyle = '#ea580c';
+                    pctx.beginPath();
+                    pctx.arc(48, 36, 22, Math.PI, Math.PI * 2);
+                    pctx.fill();
+                    pctx.fillStyle = '#292524';
+                    pctx.beginPath();
+                    pctx.ellipse(39, 24, 9, 5, -0.1, 0, Math.PI * 2);
+                    pctx.ellipse(57, 24, 9, 5, 0.1, 0, Math.PI * 2);
+                    pctx.fill();
+                });
+
+                const tCanvases = [
+                    document.getElementById('trudy-mini-portrait'),
+                    document.getElementById('voucher-trudy-canvas')
+                ];
+                tCanvases.forEach(function (c) {
+                    if (!c) return;
+                    const pctx = c.getContext('2d');
+                    pctx.clearRect(0, 0, 96, 96);
+                    pctx.fillStyle = '#fef3c7';
+                    pctx.fillRect(0, 0, 96, 96);
+                    // Floppy ears
+                    pctx.fillStyle = '#27272a';
+                    pctx.beginPath();
+                    pctx.ellipse(24, 52, 10, 22, 0.2, 0, Math.PI * 2);
+                    pctx.ellipse(72, 52, 10, 22, -0.2, 0, Math.PI * 2);
+                    pctx.fill();
+                    // Black & silver dapple head
+                    pctx.fillStyle = '#18181b';
+                    pctx.beginPath();
+                    pctx.arc(48, 48, 22, 0, Math.PI * 2);
+                    pctx.fill();
+                    pctx.fillStyle = '#9ca3af';
+                    pctx.beginPath();
+                    pctx.arc(44, 38, 8, 0, Math.PI * 2);
+                    pctx.arc(54, 52, 7, 0, Math.PI * 2);
+                    pctx.fill();
+                    // Tan eyebrows & cheeks
+                    pctx.fillStyle = '#d97706';
+                    pctx.beginPath();
+                    pctx.arc(39, 39, 3.2, 0, Math.PI * 2);
+                    pctx.arc(57, 39, 3.2, 0, Math.PI * 2);
+                    pctx.arc(38, 56, 6, 0, Math.PI * 2);
+                    pctx.arc(58, 56, 6, 0, Math.PI * 2);
+                    pctx.fill();
+                    // Eyes & nose
+                    pctx.fillStyle = '#ffffff';
+                    pctx.beginPath();
+                    pctx.arc(40, 46, 3, 0, Math.PI * 2);
+                    pctx.arc(56, 46, 3, 0, Math.PI * 2);
+                    pctx.fill();
+                    pctx.fillStyle = '#09090b';
+                    pctx.beginPath();
+                    pctx.arc(48, 58, 5, 0, Math.PI * 2);
+                    pctx.fill();
+                });
+            }
+            renderMiniPortraits();
+
+            function drawSpeechBubble(x, y, text) {
+                ctx.save();
+                ctx.font = 'bold 12px sans-serif';
+                const padX = 12;
+                const w = ctx.measureText(text).width + padX * 2;
+                const h = 26;
+
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+                ctx.strokeStyle = '#7fa668';
+                ctx.lineWidth = 2;
+                drawRoundRect(ctx, x - w / 2, y - h, w, h, 10);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.fillStyle = '#111827';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, x, y - h / 2);
+                ctx.restore();
+            }
+
+            function drawItem(it) {
+                ctx.save();
+                const bobY = it.y + Math.sin(it.bobPhase) * 6;
+                ctx.translate(it.x, bobY);
+
+                if (it.type === 'BOOK') {
+                    ctx.fillStyle = 'rgba(251, 191, 36, 0.25)';
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 23, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    ctx.fillStyle = it.color;
+                    drawRoundRect(ctx, -15, -17, 30, 34, 4);
+                    ctx.fill();
+                    ctx.fillStyle = '#fef3c7';
+                    ctx.fillRect(-11, -13, 22, 5);
+                    ctx.fillStyle = '#eab308';
+                    ctx.fillRect(-3, -17, 5, 34);
+                } else if (it.type === 'TRUDY') {
+                    ctx.fillStyle = '#fef3c7';
+                    ctx.strokeStyle = '#d97706';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 22, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+                    ctx.font = '22px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('🐕', 0, 1);
+                } else if (it.type === 'MATCHA') {
+                    ctx.fillStyle = '#ecfccb';
+                    ctx.strokeStyle = '#65a30d';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 22, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+                    ctx.font = '22px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('🍵', 0, 2);
+                } else if (it.type === 'TATTOO') {
+                    ctx.fillStyle = '#f3e8ff';
+                    ctx.strokeStyle = '#9333ea';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 22, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+                    ctx.font = '21px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('🖋️', 0, 2);
+                }
+
+                ctx.restore();
+            }
+
+            // Full-Height Golden Finish Arch + Birthday Castle so Diana crosses cleanly at ANY height!
+            function drawFinishArchAndCastle(x) {
+                ctx.save();
+                ctx.translate(x, 0);
+
+                // Full-height golden finish beam
+                const archGrad = ctx.createLinearGradient(0, CEILING_Y, 0, FLOOR_Y);
+                archGrad.addColorStop(0, 'rgba(251, 191, 36, 0.9)');
+                archGrad.addColorStop(0.5, 'rgba(163, 230, 53, 0.8)');
+                archGrad.addColorStop(1, 'rgba(251, 191, 36, 0.9)');
+                ctx.fillStyle = archGrad;
+                ctx.fillRect(-10, CEILING_Y, 16, FLOOR_Y - CEILING_Y);
+
+                // Castle & Bookstore Building behind the finish line
+                ctx.fillStyle = '#273b24';
+                ctx.strokeStyle = '#fbbf24';
+                ctx.lineWidth = 4;
+                drawRoundRect(ctx, 14, FLOOR_Y - 265, 210, 265, 20);
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.fillStyle = '#991b1b';
+                drawRoundRect(ctx, 2, FLOOR_Y - 220, 234, 34, 10);
+                ctx.fill();
+
+                ctx.fillStyle = '#fef08a';
+                ctx.font = 'bold 13px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText('🎂 ZIEL: DIANAS BUCH-SCHLOSS 🎂', 119, FLOOR_Y - 198);
+
+                ctx.fillStyle = '#fef3c7';
+                drawRoundRect(ctx, 39, FLOOR_Y - 160, 160, 125, 14);
+                ctx.fill();
+
+                ctx.font = '46px sans-serif';
+                ctx.fillText('🎂📚🐕', 119, FLOOR_Y - 82);
+                ctx.restore();
+            }
+
+            // ============================================================================
+            // QR-CODE, HTML DOWNLOAD & PRINTABLE BIRTHDAY GIFT CARD GENERATOR
+            // ============================================================================
+            const qrModal = document.getElementById('qr-modal');
+            const qrUrlInput = document.getElementById('qr-url-input');
+            const qrCodeImg = document.getElementById('qr-code-img');
+
+            function updateQrPreview() {
+                let rawUrl = (qrUrlInput.value || '').trim();
+                if (!rawUrl) {
+                    rawUrl = window.location.href;
+                }
+                const apiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=360x360&margin=12&ecc=M&data=' + encodeURIComponent(rawUrl);
+                qrCodeImg.src = apiUrl;
+            }
+
+            function openQrModal() {
+                if (!qrUrlInput.value) {
+                    const currentHref = window.location.href || '';
+                    qrUrlInput.value = currentHref.indexOf('http') === 0 ? currentHref : 'https://diana-geburtstag.tiiny.site';
+                }
+                updateQrPreview();
+                qrModal.classList.remove('hidden');
+            }
+
+            function downloadStandaloneHtml() {
+                let htmlSource = document.documentElement.outerHTML;
+                const photoScript =
+                    '<script id="embedded-photo-store">\n' +
+                    'window.__EMBEDDED_DIANA_PHOTO__ = ' + JSON.stringify(dianaDataUrl) + ';\n' +
+                    'window.__EMBEDDED_TRUDY_PHOTO__ = ' + JSON.stringify(trudyDataUrl) + ';\n' +
+                    '<\/script>';
+                htmlSource = htmlSource.replace(/<script id="embedded-photo-store">[\s\S]*?<\/script>/, photoScript);
+
+                const blob = new Blob(['<!DOCTYPE html>\n' + htmlSource], { type: 'text/html;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'dianas-flappy-birthday.html';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+            }
+
+            qrUrlInput.addEventListener('input', updateQrPreview);
+
+            document.getElementById('open-qr-top-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                openQrModal();
+            });
+            document.getElementById('open-qr-start-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                openQrModal();
+            });
+            document.getElementById('open-qr-victory-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                openQrModal();
+            });
+            document.getElementById('close-qr-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                qrModal.classList.add('hidden');
+            });
+
+            document.getElementById('download-html-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                downloadStandaloneHtml();
+            });
+            document.getElementById('top-download-html-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                downloadStandaloneHtml();
+            });
+
+            // Download Printable High-Res Birthday Gift Card with QR Code + Diana & Trudy Illustrations
+            document.getElementById('download-qr-card-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                const cardCanvas = document.createElement('canvas');
+                cardCanvas.width = 800;
+                cardCanvas.height = 1040;
+                const cctx = cardCanvas.getContext('2d');
+
+                // Background Parchment & Matcha Border
+                cctx.fillStyle = '#1b3325';
+                cctx.fillRect(0, 0, 800, 1040);
+
+                cctx.fillStyle = '#fdfaf3';
+                drawRoundRect(cctx, 32, 32, 736, 976, 36);
+                cctx.fill();
+
+                cctx.strokeStyle = '#7fa668';
+                cctx.lineWidth = 6;
+                drawRoundRect(cctx, 48, 48, 704, 944, 26);
+                cctx.stroke();
+
+                // Header Pill
+                cctx.fillStyle = '#dcfce7';
+                drawRoundRect(cctx, 210, 80, 380, 40, 20);
+                cctx.fill();
+                cctx.fillStyle = '#14532d';
+                cctx.font = 'bold 18px sans-serif';
+                cctx.textAlign = 'center';
+                cctx.fillText('🎂 PERSÖNLICHES GEBURTSTAGS-SPIEL 🎂', 400, 106);
+
+                // Title
+                cctx.fillStyle = '#111827';
+                cctx.font = '900 38px sans-serif';
+                cctx.fillText('Happy Birthday, liebe Diana!', 400, 168);
+
+                cctx.fillStyle = '#374151';
+                cctx.font = '600 19px sans-serif';
+                cctx.fillText('Bücher, Tattoos, Iced Matcha & Tigerdackel Trudy 🐾', 400, 204);
+
+                // Draw Mini Portraits of Diana & Trudy flanking the QR code
+                const dMini = document.getElementById('diana-mini-portrait');
+                const tMini = document.getElementById('trudy-mini-portrait');
+                if (dMini) {
+                    cctx.drawImage(dMini, 82, 390, 105, 105);
+                }
+                if (tMini) {
+                    cctx.drawImage(tMini, 613, 390, 105, 105);
+                }
+
+                // QR Frame
+                cctx.fillStyle = '#ffffff';
+                cctx.strokeStyle = '#fbbf24';
+                cctx.lineWidth = 6;
+                drawRoundRect(cctx, 210, 250, 380, 380, 28);
+                cctx.fill();
+                cctx.stroke();
+
+                try {
+                    cctx.drawImage(qrCodeImg, 235, 275, 330, 330);
+                } catch (err) {
+                    cctx.fillStyle = '#111827';
+                    cctx.font = 'bold 20px sans-serif';
+                    cctx.fillText('QR-Code Vorschau', 400, 440);
+                }
+
+                // Instructions Box on Card
+                cctx.fillStyle = '#f0fdf4';
+                cctx.strokeStyle = '#86efac';
+                cctx.lineWidth = 3;
+                drawRoundRect(cctx, 90, 675, 620, 180, 22);
+                cctx.fill();
+                cctx.stroke();
+
+                cctx.fillStyle = '#14532d';
+                cctx.font = '900 24px sans-serif';
+                cctx.fillText('📱 Scanne den QR-Code mit deinem Smartphone!', 400, 720);
+
+                cctx.fillStyle = '#1f2937';
+                cctx.font = '600 18px sans-serif';
+                cctx.fillText('Fliege mit Tigerdackel Trudy durch die Jura-Paragraphen (§)', 400, 760);
+                cctx.fillText('und erspiele dir bis zu 8 echte Bücher für unseren', 400, 790);
+                cctx.fillText('nächsten Buchhandlungs-Bummel (inkl. Matcha Latte 🍵)!', 400, 820);
+
+                // Footer Icons
+                cctx.fillStyle = '#b45309';
+                cctx.font = 'bold 22px sans-serif';
+                cctx.fillText('📚 Bücher   •   🐕 Trudy   •   🍵 Matcha   •   🖋️ Tattoos', 400, 925);
+
+                try {
+                    const dataUrl = cardCanvas.toDataURL('image/png');
+                    const link = document.createElement('a');
+                    link.download = 'Dianas_Geburtstagskarte_QR.png';
+                    link.href = dataUrl;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                } catch (err) {}
+            });
+
+            // ============================================================================
+            // EVENT LISTENERS & UI CONTROLS (NO BLUE FLASH, CLEAN POINTER HANDLING)
+            // ============================================================================
+            window.addEventListener('keydown', function (e) {
+                if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'KeyW') {
+                    const activeTag = document.activeElement ? document.activeElement.tagName : '';
+                    if (activeTag === 'INPUT' || activeTag === 'SELECT' || activeTag === 'TEXTAREA') return;
+                    e.preventDefault();
+                    if (gameState === 'PLAYING') {
+                        triggerFlap();
+                    }
+                }
+            });
+
+            canvas.addEventListener('pointerdown', function (e) {
+                e.preventDefault();
+                if (gameState === 'PLAYING') {
+                    triggerFlap();
+                }
+            }, { passive: false });
+
+            document.getElementById('bottom-flap-btn').addEventListener('pointerdown', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (gameState === 'PLAYING') {
+                    triggerFlap();
+                }
+            }, { passive: false });
+
+            document.getElementById('start-game-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                startGame();
+            });
+
+            document.getElementById('top-new-game-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                startGame();
+            });
+
+            document.getElementById('play-again-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                startGame();
+            });
+
+            document.getElementById('music-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                audio.muted = !audio.muted;
+                document.getElementById('mute-icon').textContent = audio.muted ? '🔇' : '🔊';
+                document.getElementById('mute-label').textContent = audio.muted ? 'Stumm' : 'Ton';
+            });
+
+            const settingsModal = document.getElementById('settings-modal');
+            document.getElementById('settings-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                settingsModal.classList.remove('hidden');
+            });
+
+            document.getElementById('open-photo-modal-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                settingsModal.classList.remove('hidden');
+            });
+
+            document.getElementById('close-settings-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                settingsModal.classList.add('hidden');
+            });
+
+            document.getElementById('save-settings-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                const customMsg = document.getElementById('custom-voucher-input').value.trim();
+                if (customMsg) {
+                    document.getElementById('voucher-custom-msg').textContent = '„' + customMsg + '“';
+                }
+                difficulty = document.getElementById('difficulty-select').value;
+                totalDuration = parseInt(document.getElementById('duration-select').value, 10) || 60;
+                settingsModal.classList.add('hidden');
+            });
+
+            function applyDianaPhoto(dataUrl) {
+                if (!dataUrl) return;
+                dianaDataUrl = dataUrl;
+                const img = new Image();
+                img.onload = function () {
+                    dianaPhotoImg = img;
+                    document.getElementById('start-diana-badge').innerHTML = '<img src="' + dataUrl + '" alt="Diana">';
+                    document.getElementById('voucher-diana-avatar').innerHTML = '<img src="' + dataUrl + '" alt="Diana">';
+                };
+                img.src = dataUrl;
+            }
+
+            function applyTrudyPhoto(dataUrl) {
+                if (!dataUrl) return;
+                trudyDataUrl = dataUrl;
+                const img = new Image();
+                img.onload = function () {
+                    trudyPhotoImg = img;
+                    document.getElementById('start-trudy-badge').innerHTML = '<img src="' + dataUrl + '" alt="Trudy">';
+                    document.getElementById('voucher-trudy-avatar').innerHTML = '<img src="' + dataUrl + '" alt="Trudy">';
+                };
+                img.src = dataUrl;
+            }
+
+            if (dianaDataUrl) applyDianaPhoto(dianaDataUrl);
+            if (trudyDataUrl) applyTrudyPhoto(trudyDataUrl);
+
+            document.getElementById('upload-diana').addEventListener('change', function (e) {
+                const file = e.target.files && e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function (ev) {
+                    applyDianaPhoto(ev.target.result);
+                };
+                reader.readAsDataURL(file);
+            });
+
+            document.getElementById('upload-trudy').addEventListener('change', function (e) {
+                const file = e.target.files && e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function (ev) {
+                    applyTrudyPhoto(ev.target.result);
+                };
+                reader.readAsDataURL(file);
+            });
+
+            document.getElementById('reset-photos-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                dianaPhotoImg = null;
+                trudyPhotoImg = null;
+                dianaDataUrl = null;
+                trudyDataUrl = null;
+                document.getElementById('start-diana-badge').innerHTML = '<canvas id="diana-mini-portrait" width="96" height="96"></canvas>';
+                document.getElementById('start-trudy-badge').innerHTML = '<canvas id="trudy-mini-portrait" width="96" height="96"></canvas>';
+                document.getElementById('voucher-diana-avatar').innerHTML = '<canvas id="voucher-diana-canvas" width="96" height="96"></canvas>';
+                document.getElementById('voucher-trudy-avatar').innerHTML = '<canvas id="voucher-trudy-canvas" width="96" height="96"></canvas>';
+                renderMiniPortraits();
+            });
+
+            document.getElementById('copy-voucher-btn').addEventListener('click', function (e) {
+                e.stopPropagation();
+                const text = '🎂 GEBURTSTAGS-BUCHGUTSCHEIN FÜR DIANA 🎂\n📚 Erspielte Bücher: ' + booksCount + ' von 8 Wunschbüchern!\n🐾 Juristisch geprüft & von Tigerdackel Trudy beglaubigt\n💌 ' + document.getElementById('voucher-custom-msg').textContent;
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                try {
+                    document.execCommand('copy');
+                    const btnText = document.getElementById('copy-btn-text');
+                    btnText.textContent = 'Gutschein kopiert! ✅';
+                    setTimeout(function () {
+                        btnText.textContent = 'Gutschein-Text kopieren';
+                    }, 2200);
+                } catch (err) {}
+                document.body.removeChild(ta);
+            });
+
+            // Start main animation loop
+            let lastTime = performance.now();
+            function gameLoop(now) {
+                const dt = Math.min(0.05, Math.max(0.001, (now - lastTime) / 1000));
+                lastTime = now;
+                updateGame(dt);
+                drawScene();
+                requestAnimationFrame(gameLoop);
+            }
+
+            renderHudBookSlots();
+            requestAnimationFrame(gameLoop);
+        })();
+    </script>
+</body>
+</html>
