@@ -2,9 +2,6 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-<!-- This site is hosted on Netlify. Anyone can build and deploy a site
-     like this one for free: https://netlify.new/?utm_campaign=loops&utm_source=ai-legible&utm_medium=owned&utm_content=comment&utm_id=8ee8935d-fea4-4e0c-82a5-0df06811612a
-     Netlify hosting facts for this site: static/SSR served via Netlify Edge. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title data-id="th-modified">Dianas Flappy-Birthday: Bücher-Flug mit Trudy (Cinematic Edition)</title>
     <style>
@@ -838,7 +835,12 @@
             display: none !important;
         }
     </style>
-<meta property="og:title" content="Dianas Flappy-Birthday: Bücher-Flug mit Trudy (Cinematic Edition)" data-id="th-modified" ><meta name="description" content="dianas_flappy_birthday" data-id="th-modified" ><meta property="og:description" content="dianas_flappy_birthday" data-id="th-modified" ><meta property="og:image" content="https://tiiny.host/assets/logo-purple-bg.png" data-id="th-modified" ><meta property="og:image:width" content="1501" data-id="th-modified" ><meta property="og:image:height" content="1501" data-id="th-modified" ><meta property="og:image:type" content="image/png" data-id="th-modified" ><meta property="og:url" content="https://happy-birthday-diana.tiiny.site/" data-id="th-modified" ><meta property="og:type" content="website" data-id="th-modified" ><script defer data-domain="happy-birthday-diana.tiiny.site" src="https://analytics.tiiny.net/js/plausible.js"></script><script type="text/javascript" src="https://tiiny.host/ad-script.js"></script></head>
+    <meta name="description" content="Dianas Flappy-Birthday: Bücher-Flug mit Trudy">
+    <meta property="og:title" content="Dianas Flappy-Birthday: Bücher-Flug mit Trudy (Cinematic Edition)">
+    <meta property="og:description" content="Dianas Flappy-Birthday: Bücher-Flug mit Trudy">
+    <meta property="og:url" content="https://broemp.github.io/dianas-flappy-birthday/">
+    <meta property="og:type" content="website">
+</head>
 <body>
 
     <!-- ALWAYS-ACCESSIBLE TOP BAR -->
@@ -1093,7 +1095,7 @@
                 <div class="qr-layout">
                     <!-- Live QR Code Box -->
                     <div class="qr-preview-box">
-                        <img id="qr-code-img" alt="QR-Code zum Spiel" crossorigin="anonymous" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=10&data=https%3A%2F%2Ftiiny.host">
+                        <img id="qr-code-img" alt="QR-Code zum Spiel" crossorigin="anonymous" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=10&data=https%3A%2F%2Fbroemp.github.io%2Fdianas-flappy-birthday%2F">
                         <div style="font-size:11px; font-weight:800; color:#14532d; margin-top:8px;">🎂 Scannen für Dianas Spiel</div>
                         <div style="font-size:10px; color:#6b7280;">Live-Vorschau des QR-Codes</div>
                     </div>
@@ -1101,17 +1103,17 @@
                     <!-- Instructions & Actions -->
                     <div>
                         <div class="settings-group" style="background:#f0fdf4; border-color:#86efac;">
-                            <label>💡 So erstellst du in 30 Sekunden deinen persönlichen Spiel-QR-Code:</label>
+                            <label>💡 So teilst du Dianas Geburtstags-Spiel:</label>
                             <ol style="font-size:12px; color:#1f2937; padding-left:18px; line-height:1.5;">
-                                <li>Klicke auf <strong>„1. Spiel-Datei (.html) herunterladen“</strong>.</li>
-                                <li>Ziehe diese Datei kostenlos auf <strong>tiiny.host</strong> oder <strong>app.netlify.com/drop</strong> (oder nutze oben den „Teilen“-Link).</li>
-                                <li>Füge deinen Link hier unten ein – der <strong>QR-Code</strong> und die <strong>illustrierte Geburtstagskarte (mit Diana & Trudy)</strong> aktualisieren sich sofort!</li>
+                                <li>Das Spiel ist bereits online auf GitHub Pages verfügbar.</li>
+                                <li>Scanne den QR-Code oder verwende den Link unten zum Teilen.</li>
+                                <li>Änderst du den Link, aktualisieren sich der <strong>QR-Code</strong> und die <strong>illustrierte Geburtstagskarte (mit Diana & Trudy)</strong> sofort!</li>
                             </ol>
                         </div>
 
                         <div class="settings-group">
                             <label for="qr-url-input">🔗 Öffentlicher Link (URL) zu Dianas Geburtstags-Spiel:</label>
-                            <input type="url" id="qr-url-input" class="text-input" placeholder="https://diana-geburtstag.tiiny.site">
+                            <input type="url" id="qr-url-input" class="text-input" placeholder="https://broemp.github.io/dianas-flappy-birthday/">
                         </div>
 
                         <div class="btn-row" style="margin-top:10px;">
@@ -2967,7 +2969,7 @@
             function openQrModal() {
                 if (!qrUrlInput.value) {
                     const currentHref = window.location.href || '';
-                    qrUrlInput.value = currentHref.indexOf('http') === 0 ? currentHref : 'https://diana-geburtstag.tiiny.site';
+                    qrUrlInput.value = currentHref.indexOf('http') === 0 ? currentHref : 'https://broemp.github.io/dianas-flappy-birthday/';
                 }
                 updateQrPreview();
                 qrModal.classList.remove('hidden');
